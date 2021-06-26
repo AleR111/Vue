@@ -1,12 +1,14 @@
 <template>
     <div>
       <h2>Калькулятор</h2>
-      <input v-model.number = 'input'  type="text"><br>
+      <input v-model.number = 'input'  type="number"><br>
       <div class="operators">
-        <button @click="operator = '+'; setOperator1()" class="operator">+</button>
-        <button @click="operator = '-'; setOperator1()" class="operator">-</button>
-        <button @click="operator = '*'; setOperator1()" class="operator">*</button>
-        <button @click="operator = '/'; setOperator1()" class="operator">/</button>
+        <button @click="setData('+')" class="operator">+</button>
+        <button @click="setData('-')" class="operator">-</button>
+        <button @click="setData('*')" class="operator">*</button>
+        <button @click="setData('/')" class="operator">/</button>
+        <button @click="setData('^2')" class="operator">^2</button>
+        <button @click="setData('%')" class="operator">%</button>
       </div>
       <button @click="calculate">=</button>
     </div>
@@ -14,7 +16,7 @@
 
 <script>
 export default {
-  name: "calc",
+  name: "Calc",
   data() {
     return {
       input: null,
@@ -25,9 +27,13 @@ export default {
   },
 
   methods: {
-    setOperator1() {
+    setData(operator) {
+
       this.operand1 = this.input;
-      this.input = ''
+      if (operator === '^2') return this.input = Math.pow(this.operand1, 2);
+      this.operator = operator;
+      this.input = '';
+
     },
     calculate() {
       this.operand2 = this.input;
@@ -41,8 +47,10 @@ export default {
           break;
         case '/': this.input = this.operand1 / this.operand2;
           break;
+        case '%': this.input = Math.floor(this.operand1 / this.operand2);
+
       }
-    }
+    },
   },
 
 };
