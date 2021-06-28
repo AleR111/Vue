@@ -49,7 +49,10 @@
       </button>
     </div>
 
-    <div class="screen-keyboard">
+    <input type="checkbox" id="checkbox" v-model="checkedKeyboard">
+    <label for="checkbox">Экранная клавиатура</label>
+
+    <div v-show="checkedKeyboard" class="screen-keyboard">
       <button v-for='btn in keyButton'
               :key='btn'>
         {{ btn }}
@@ -65,6 +68,7 @@ export default {
     return {
       myCollection: [1, 2, 4, 4, 5],
       operands: ['+', '-', '/', '*'],
+      checkedKeyboard: false,
       keyButton: [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, '←'],
       text1: "",
       operand1: 0,
