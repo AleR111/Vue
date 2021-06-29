@@ -54,10 +54,16 @@
 
     <div v-show="checkedKeyboard" class="screen-keyboard">
       <button v-for='btn in keyButton'
+              @click="enterOperand(btn)"
               :key='btn'>
         {{ btn }}
       </button>
     </div>
+    <br>
+    <input type="radio" id="one" value="operand1" v-model="pickedOperand">
+    <label for="one">Операнд1</label>
+    <input type="radio" id="two" value="operand2" v-model="pickedOperand">
+    <label for="two">Операнд2</label>
   </div>
 </template>
 
@@ -71,6 +77,7 @@ export default {
       checkedKeyboard: false,
       keyButton: [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, '←'],
       text1: "",
+      pickedOperand: null,
       operand1: 0,
       operand2: 0,
       fibResult: 0,
@@ -102,7 +109,7 @@ export default {
     },
     add() {
       this.result = this.operand1 + this.operand2
-      this.fibResult = this.fib1 + this.fib2
+      // this.fibResult = this.fib1 + this.fib2
     },
     substract() {
       console.log('substract')
@@ -125,15 +132,23 @@ export default {
     },
     fib(n) {
       return n <= 1 ? n : this.fib(n - 1) + this.fib(n - 2);
+    },
+    enterOperand(btn) {
+      const operand = this.pickedOperand;
+
+      if (btn === '←') {
+        this[`${operand}`] = this[`${operand}`].toString().slice(0, -1)
+      } else this[`${operand}`] += `${btn}`;
+      this[`${operand}`] = +this[`${operand}`]
     }
   },
   computed: {
-    fib1() {
-      return this.fib(this.operand1)
-    },
-    fib2() {
-      return this.fib(this.operand2)
-    },
+    // fib1() {
+    //   return this.fib(this.operand1)
+    // },
+    // fib2() {
+    //   return this.fib(this.operand2)
+    // },
   }
 }
 </script>
