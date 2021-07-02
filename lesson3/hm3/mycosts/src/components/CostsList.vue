@@ -7,20 +7,22 @@
         <col class="power"/>
       </colgroup>
       <thead>
-      <tr class="tr">
-        <th scope="col">Brand</th>
-        <th scope="col">Price</th>
-        <th scope="col">Power Source</th>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Date</th>
+        <th scope="col">Category</th>
+        <th scope="col">Value</th>
       </tr>
       </thead>
       <tbody>
-        <tr class="tr" v-for="(elem, idx) in costsList"
+      <tr class="tr" v-for="(elem, idx) in costsList"
           :key="idx"
-        >
-          <td class="td">{{ elem.date }}</td>
-          <td class="td">{{ elem.category }}</td>
-          <td class="td">{{ elem.value }}</td>
-        </tr>
+      >
+        <td class="td">{{ idx + 1 }}</td>
+        <td class="td">{{ elem.date }}</td>
+        <td class="td">{{ elem.category }}</td>
+        <td class="td">{{ elem.value }}</td>
+      </tr>
       </tbody>
     </table>
   </div>
@@ -43,7 +45,18 @@ export default {
   border-spacing: 0;
   border-collapse: collapse;
 }
+
 .td, th {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid rgba(120, 120, 120, 0.82);
+  padding: 10px;
+  text-align: left;
+}
+
+.tr:nth-of-type(odd) {
+  background-color: rgba(231, 193, 193, 0.53);
+}
+
+.tr:nth-of-type(even) {
+  background-color: rgba(201, 201, 232, 0.43);
 }
 </style>
