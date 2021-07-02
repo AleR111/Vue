@@ -1,17 +1,51 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <CostsList :costsList="costsList"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+import CostsList from "@/components/CostsList";
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    CostsList
+  },
+  data() {
+    return {
+      costsList: []
+    }
+  },
+  methods: {
+    fetchData() {
+      return [
+        {
+          date: "21.06.2021",
+          category: "Food",
+          value: 580
+        },
+        {
+          date: "22.06.2021",
+          category: "Internet",
+          value: 400
+        },
+        {
+          date: "25.06.2021",
+          category: "Food",
+          value: 300
+        },
+        {
+          date: "27.06.2021",
+          category: "Food",
+          value: 450
+        },
+      ]
+    }
+  },
+  created() {
+    this.costsList = this.fetchData()
   }
 }
 </script>
