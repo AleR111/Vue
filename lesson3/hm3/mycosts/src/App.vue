@@ -1,14 +1,16 @@
 <template>
   <div id="app">
-    <AddForm @addData="addData"/>
+    <button @click="showAddForm = !showAddForm">ADD NEW COST <span>+</span></button>
+    <AddForm v-show="showAddForm" @addData="addData"/>
     <CostsList :costsList="costsList"/>
   </div>
 </template>
 
 <script>
 
+// import style from './css/style.scss';
 import CostsList from "./components/CostsList";
-import AddForm from './components/AddForm'
+import AddForm from './components/AddForm';
 
 export default {
   name: 'App',
@@ -18,7 +20,9 @@ export default {
   },
   data() {
     return {
-      costsList: []
+      costsList: [],
+      showAddForm: false,
+      // qwe: style
     }
   },
   methods: {
