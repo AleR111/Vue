@@ -41,6 +41,7 @@ export default {
         value
       }
       console.log(data);
+      this.$emit('addData', data)
     }
   }
 }

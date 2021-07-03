@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <AddForm/>
+    <AddForm @addData="addData"/>
     <CostsList :costsList="costsList"/>
   </div>
 </template>
@@ -45,6 +45,9 @@ export default {
           value: 450
         },
       ]
+    },
+    addData(data) {
+      this.costsList = [...this.costsList, data]
     }
   },
   created() {
