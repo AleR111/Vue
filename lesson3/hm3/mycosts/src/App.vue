@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <button @click="showAddForm = !showAddForm">ADD NEW COST <span>+</span></button>
+    <header class="header">My personal coasts</header>
+    <button class="btn-show" @click="showAddForm = !showAddForm"><span class="text-span">ADD NEW COST</span> <span class="plus">+</span></button>
     <AddForm v-show="showAddForm" @addData="addData"/>
     <CostsList :costsList="costsList"/>
   </div>
@@ -8,7 +9,6 @@
 
 <script>
 
-// import style from './css/style.scss';
 import CostsList from "./components/CostsList";
 import AddForm from './components/AddForm';
 
@@ -21,8 +21,7 @@ export default {
   data() {
     return {
       costsList: [],
-      showAddForm: false,
-      // qwe: style
+      showAddForm: false
     }
   },
   methods: {
@@ -60,13 +59,37 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+.header {
+  font-size: 32px;
+  text-align: left;
+  margin-bottom: 24px;
+}
 #app {
+  max-width: 1140px;
+  margin: 0 auto;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  //margin-top: 60px;
+}
+.btn-show {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.85);
+  background-color: #3e99a1;
+  display: flex;
+  align-items: center;
+  border: none;
+  padding: 8px 16px;
+  margin-bottom: 16px;
+}
+.btn-show:hover {
+  cursor: pointer;
+}
+.plus {
+  font-size: 20px;
+  padding-left: 16px;
 }
 </style>

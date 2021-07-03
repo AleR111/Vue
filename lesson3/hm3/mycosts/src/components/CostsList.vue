@@ -42,12 +42,13 @@ export default {
 
 <style scoped>
 .table {
+  width: 350px;
   border-spacing: 0;
   border-collapse: collapse;
 }
 
 .td, th {
-  border-bottom: 1px solid rgba(120, 120, 120, 0.82);
+  border-bottom: 1px solid rgba(161, 161, 161, 0.45);
   padding: 10px;
   text-align: left;
 }

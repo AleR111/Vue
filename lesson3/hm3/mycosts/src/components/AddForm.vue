@@ -4,7 +4,7 @@
       <input class="input" type="text" placeholder="Payment description" v-model="category">
       <input class="input" type="number" placeholder="Payment amount" v-model="value">
       <input class="input" type="date" placeholder="Payment date" v-model="date">
-      <button class="btn-form" type="button" @click="addPayment">ADD <span class="plus">+</span></button>
+      <button class="btn-form" type="button" @click="addPayment"><span class="text-span">ADD</span> <span class="plus">+</span></button>
     </form>
   </div>
 </template>
@@ -48,7 +48,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$widthForm: 250px;
+$widthForm: 300px;
 
 .form {
   width: $widthForm;
@@ -65,6 +65,9 @@ $widthForm: 250px;
   border-bottom: 2px solid rgba(192, 192, 192, 0.78);
 }
 .btn-form {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: center;
   width: $widthForm / 2;
   font-size: 16px;
   color: rgba(255, 255, 255, 0.85);
@@ -73,5 +76,17 @@ $widthForm: 250px;
   padding: 8px 16px;
   margin-top: 8px;
   justify-self: flex-end;
+}
+.btn-form:hover {
+  cursor: pointer;
+}
+.plus {
+  font-size: 20px;
+  grid-column: 3;
+  justify-self: flex-end;
+}
+.text-span {
+  align-self: center;
+  grid-column: 2;
 }
 </style>
