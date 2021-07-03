@@ -4,7 +4,7 @@
     <button class="btn-show" @click="showAddForm = !showAddForm"><span class="text-span">ADD NEW COST</span> <span class="plus">+</span></button>
     <AddForm v-show="showAddForm" @addData="addData"/>
     <CostsList :costsList="costsList"/>
-    <Pagination :amountPages="amountPages"/>
+    <Pagination :amountPages="amountPages" @showPage="showPage"/>
   </div>
 </template>
 
@@ -60,6 +60,9 @@ export default {
     },
     setAmountPages() {
       this.amountPages = this.amountPages = Math.ceil(this.costsList.length / this.amountRows)
+    },
+    showPage(num) {
+      console.log(num)
     }
   },
   created() {

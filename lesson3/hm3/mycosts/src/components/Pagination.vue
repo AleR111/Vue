@@ -1,6 +1,11 @@
 <template>
   <div>
-{{amountPages}}
+    <button v-for="elem in amountPages"
+            :key="elem"
+            @click="setNumberPage(elem)"
+    >
+      {{ elem }}
+    </button>
   </div>
 </template>
 
@@ -11,6 +16,11 @@ export default {
     amountPages: {
       type: Number,
       default: () => 1
+    }
+  },
+  methods: {
+    setNumberPage(num) {
+      this.$emit('showPage', num)
     }
   }
 }
