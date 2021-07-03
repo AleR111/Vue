@@ -4,6 +4,7 @@
     <button class="btn-show" @click="showAddForm = !showAddForm"><span class="text-span">ADD NEW COST</span> <span class="plus">+</span></button>
     <AddForm v-show="showAddForm" @addData="addData"/>
     <CostsList :costsList="costsList"/>
+    <Pagination :amountPages="amountPages"/>
   </div>
 </template>
 
@@ -11,17 +12,21 @@
 
 import CostsList from "./components/CostsList";
 import AddForm from './components/AddForm';
+import Pagination from './components/Pagination'
 
 export default {
   name: 'App',
   components: {
     CostsList,
-    AddForm
+    AddForm,
+    Pagination
   },
   data() {
     return {
       costsList: [],
-      showAddForm: false
+      showAddForm: false,
+      amountRows: 5,
+      amountPages: null
     }
   },
   methods: {
@@ -50,11 +55,16 @@ export default {
       ]
     },
     addData(data) {
-      this.costsList = [...this.costsList, data]
+      this.costsList = [...this.costsList, data];
+      this.setAmountPages()
+    },
+    setAmountPages() {
+      this.amountPages = this.amountPages = Math.ceil(this.costsList.length / this.amountRows)
     }
   },
   created() {
-    this.costsList = this.fetchData()
+    this.costsList = this.fetchData();
+    this.setAmountPages()
   }
 }
 </script>
