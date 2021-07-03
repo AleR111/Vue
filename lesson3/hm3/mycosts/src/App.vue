@@ -1,17 +1,20 @@
 <template>
   <div id="app">
+    <AddForm/>
     <CostsList :costsList="costsList"/>
   </div>
 </template>
 
 <script>
 
-import CostsList from "@/components/CostsList";
+import CostsList from "./components/CostsList";
+import AddForm from './components/AddForm'
 
 export default {
   name: 'App',
   components: {
-    CostsList
+    CostsList,
+    AddForm
   },
   data() {
     return {
