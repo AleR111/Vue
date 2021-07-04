@@ -1,9 +1,10 @@
 <template>
   <div id="app">
     <header class="header">My personal coasts</header>
-    <button class="btn-show" @click="showAddForm = !showAddForm"><span class="text-span">ADD NEW COST</span> <span class="plus">+</span></button>
+    <button class="btn-show" @click="showAddForm = !showAddForm"><span class="text-span">ADD NEW COST</span> <span
+        class="plus">+</span></button>
     <AddForm v-show="showAddForm" @addData="addData"/>
-    <CostsList :costsList="costsList"/>
+    <CostsList :costsList="displayedCostsList"/>
     <Pagination :amountPages="amountPages" @showPage="showPage"/>
   </div>
 </template>
@@ -24,6 +25,7 @@ export default {
   data() {
     return {
       costsList: [],
+      displayedCostsList: [],
       showAddForm: false,
       amountRows: 5,
       amountPages: null
@@ -55,19 +57,30 @@ export default {
       ]
     },
     addData(data) {
-      this.costsList = [...this.costsList, data];
-      this.setAmountPages()
+      this.costsList = [data, ...this.costsList];
+      this.setAmountPages();
+      this.showPage(1)
     },
     setAmountPages() {
       this.amountPages = this.amountPages = Math.ceil(this.costsList.length / this.amountRows)
     },
     showPage(num) {
-      console.log(num)
+      this.displayedCostsList = [];
+      const fromElem = num * this.amountRows - this.amountRows;
+      const toElem = num * this.amountRows - 1;
+
+      this.costsList.forEach((elem, idx) => {
+        if (idx >= fromElem && idx <= toElem) {
+          elem.index = idx;
+          this.displayedCostsList.push(elem);
+        }
+      })
     }
   },
   created() {
     this.costsList = this.fetchData();
-    this.setAmountPages()
+    this.setAmountPages();
+    this.showPage(1)
   }
 }
 </script>
@@ -78,6 +91,7 @@ export default {
   text-align: left;
   margin-bottom: 24px;
 }
+
 #app {
   max-width: 1140px;
   margin: 0 auto;
@@ -88,6 +102,7 @@ export default {
   color: #2c3e50;
   //margin-top: 60px;
 }
+
 .btn-show {
   font-size: 16px;
   color: rgba(255, 255, 255, 0.85);
@@ -98,9 +113,11 @@ export default {
   padding: 8px 16px;
   margin-bottom: 16px;
 }
+
 .btn-show:hover {
   cursor: pointer;
 }
+
 .plus {
   font-size: 20px;
   padding-left: 16px;
