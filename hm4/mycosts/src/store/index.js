@@ -13,11 +13,14 @@ export default new Vuex.Store({
             state.costsList = payload
         }
     },
+    getters: {
+        getCostsList: state => state.costsList
+    },
     actions: {
-      getCostsList({commit}, url) {
-          fetch(url)
-              .then(resolve => resolve.json())
-              .then(data => commit('setCostsList', data))
+        fetchCostsList({commit}, url) {
+            fetch(url)
+                .then(resolve => resolve.json())
+                .then(data => commit('setCostsList', data))
         }
     }
 })

@@ -4,7 +4,7 @@
     <button class="btn-show" @click="showAddForm = !showAddForm"><span class="text-span">ADD NEW COST</span> <span
         class="plus">+</span></button>
     <AddForm v-show="showAddForm" @addData="addData"/>
-    <CostsList :costsList="displayedCostsList"/>
+    <CostsList :costsList="displayCostsList"/>
     <Pagination :amountPages="amountPages" @showPage="showPage"/>
   </div>
 </template>
@@ -38,7 +38,7 @@ export default {
       '',
     ]),
     ...mapActions([
-        'getCostsList'
+      'fetchCostsList'
     ]),
     fetchData() {
       return [
@@ -87,14 +87,17 @@ export default {
   },
   computed: {
     ...mapGetters([
-        ''
+      'getCostsList'
     ]),
+    displayCostsList() {
+      return this.getCostsList
+    }
   },
   created() {
     this.costsList = this.fetchData();
     this.setAmountPages();
     this.showPage(1)
-    this.getCostsList(this.urlCostsList)
+    this.fetchCostsList(this.urlCostsList)
   }
 }
 </script>
