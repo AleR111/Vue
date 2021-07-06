@@ -14,6 +14,7 @@
 import CostsList from "./components/CostsList";
 import AddForm from './components/AddForm';
 import Pagination from './components/Pagination'
+import {mapMutations, mapGetters, mapActions} from 'vuex'
 
 export default {
   name: 'App',
@@ -24,14 +25,21 @@ export default {
   },
   data() {
     return {
+      urlCostsList: 'https://raw.githubusercontent.com/AleR111/Vue/fetch_data/fetch_data/payment_list.json',
       costsList: [],
       displayedCostsList: [],
       showAddForm: false,
       amountRows: 5,
-      amountPages: null
+      amountPages: null,
     }
   },
   methods: {
+    ...mapMutations([
+      '',
+    ]),
+    ...mapActions([
+        'getCostsList'
+    ]),
     fetchData() {
       return [
         {
@@ -77,10 +85,16 @@ export default {
       })
     }
   },
+  computed: {
+    ...mapGetters([
+        ''
+    ]),
+  },
   created() {
     this.costsList = this.fetchData();
     this.setAmountPages();
     this.showPage(1)
+    this.getCostsList(this.urlCostsList)
   }
 }
 </script>
