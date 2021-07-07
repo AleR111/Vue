@@ -25,10 +25,10 @@ export default {
   },
   data() {
     return {
-      urlCostsList: 'https://raw.githubusercontent.com/AleR111/Vue/hm4/fetch_data/page1.json',
+      urlCostsList: 'https://raw.githubusercontent.com/AleR111/Vue/hm4/fetch_data',
       urlAmountPages: 'https://raw.githubusercontent.com/AleR111/Vue/hm4/fetch_data/amountPages.json',
       costsList: [],
-      displayedCostsList: [],
+      page: 'page1',
       showAddForm: false,
       amountRows: 5,
       // amountPages: null,
@@ -76,18 +76,9 @@ export default {
     },
     showPage(num) {
 
-      this.fetchCostsList(`${this.urlCostsList} + num`)
+      this.fetchCostsList(`page${num}`)
+      this.page = `page${num}`
 
-      this.displayedCostsList = [];
-      const fromElem = num * this.amountRows - this.amountRows;
-      const toElem = num * this.amountRows - 1;
-
-      this.costsList.forEach((elem, idx) => {
-        if (idx >= fromElem && idx <= toElem) {
-          elem.index = idx;
-          this.displayedCostsList.push(elem);
-        }
-      })
     }
   },
   computed: {
@@ -96,7 +87,7 @@ export default {
       'getAmountPages'
     ]),
     displayCostsList() {
-      return this.getCostsListPage('page1')
+      return this.getCostsListPage(this.page)
     },
     getAmountPages1() {
       console.log(this.getAmountPages)
@@ -107,7 +98,7 @@ export default {
     this.costsList = this.fetchData();
     this.setAmountPages();
     this.showPage(1)
-    this.fetchCostsList(this.urlCostsList)
+    this.fetchCostsList(`page1`)
     this.fetchAmountPages(this.urlAmountPages)
   }
 }

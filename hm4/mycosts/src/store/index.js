@@ -6,9 +6,9 @@ Vue.use(Vuex)
 export default new Vuex.Store({
 
     state: {
-        url: 'https://raw.githubusercontent.com/AleR111/Vue/hm4/fetch_data/',
+        url: 'https://raw.githubusercontent.com/AleR111/Vue/hm4/fetch_data',
         costsList: {},
-        amountPages: null
+        amountPages: {}
     },
     mutations: {
         setCostsList(state, payload) {
@@ -17,7 +17,7 @@ export default new Vuex.Store({
             console.log(state.costsList)
         },
         setAmountPages(state, payload) {
-            state.amountPages = payload.amountPages
+            state.amountPages = payload
         }
     },
     getters: {
@@ -25,13 +25,13 @@ export default new Vuex.Store({
             if (state.costsList[page]) return state.costsList[page];
         },
         getAmountPages: state => {
-            console.log(state.amountPages)
-          return state.amountPages
+          return state.amountPages.amount
         }
     },
     actions: {
-        fetchCostsList({commit}, url) {
-            fetch(url)
+        fetchCostsList({commit, state}, page) {
+            if (state.costsList[page]) return 
+            fetch(`${state.url}/${page}.json`)
                 .then(resolve => resolve.json())
                 .then(data => commit('setCostsList', data))
         },
