@@ -5,7 +5,7 @@
         class="plus">+</span></button>
     <AddForm v-show="showAddForm" @addData="addData"/>
     <CostsList :costsList="displayCostsList"/>
-    <Pagination :amountPages="amountPages" @showPage="showPage"/>
+    <Pagination :amountPages="getAmountPages1" @showPage="showPage"/>
   </div>
 </template>
 
@@ -26,11 +26,12 @@ export default {
   data() {
     return {
       urlCostsList: 'https://raw.githubusercontent.com/AleR111/Vue/hm4/fetch_data/page1.json',
+      urlAmountPages: 'https://raw.githubusercontent.com/AleR111/Vue/hm4/fetch_data/amountPages.json',
       costsList: [],
       displayedCostsList: [],
       showAddForm: false,
       amountRows: 5,
-      amountPages: null,
+      // amountPages: null,
     }
   },
   methods: {
@@ -38,7 +39,8 @@ export default {
       '',
     ]),
     ...mapActions([
-      'fetchCostsList'
+      'fetchCostsList',
+      'fetchAmountPages'
     ]),
     fetchData() {
       return [
@@ -90,10 +92,15 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'getCostsListPage'
+      'getCostsListPage',
+      'getAmountPages'
     ]),
     displayCostsList() {
       return this.getCostsListPage('page1')
+    },
+    getAmountPages1() {
+      console.log(this.getAmountPages)
+      return this.getAmountPages
     }
   },
   created() {
@@ -101,6 +108,7 @@ export default {
     this.setAmountPages();
     this.showPage(1)
     this.fetchCostsList(this.urlCostsList)
+    this.fetchAmountPages(this.urlAmountPages)
   }
 }
 </script>
