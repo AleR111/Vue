@@ -25,7 +25,7 @@ export default {
   },
   data() {
     return {
-      urlCostsList: 'https://raw.githubusercontent.com/AleR111/Vue/fetch_data/fetch_data/payment_list.json',
+      urlCostsList: 'https://raw.githubusercontent.com/AleR111/Vue/hm4/fetch_data/page1.json',
       costsList: [],
       displayedCostsList: [],
       showAddForm: false,
@@ -73,6 +73,9 @@ export default {
       this.amountPages = this.amountPages = Math.ceil(this.costsList.length / this.amountRows)
     },
     showPage(num) {
+
+      this.fetchCostsList(`${this.urlCostsList} + num`)
+
       this.displayedCostsList = [];
       const fromElem = num * this.amountRows - this.amountRows;
       const toElem = num * this.amountRows - 1;
@@ -87,10 +90,10 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'getCostsList'
+      'getCostsListPage'
     ]),
     displayCostsList() {
-      return this.getCostsList
+      return this.getCostsListPage('page1')
     }
   },
   created() {

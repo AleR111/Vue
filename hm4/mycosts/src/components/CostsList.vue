@@ -18,7 +18,7 @@
       <tr class="tr" v-for="(elem, idx) in costsList"
           :key="idx"
       >
-        <td class="td">{{ elem.index + 1 }}</td>
+        <td class="td">{{ elem.id }}</td>
         <td class="td">{{ elem.date }}</td>
         <td class="td">{{ elem.category }}</td>
         <td class="td">{{ elem.value }}</td>

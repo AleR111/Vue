@@ -6,15 +6,20 @@ Vue.use(Vuex)
 export default new Vuex.Store({
 
     state: {
-        costsList: [],
+        url: 'https://raw.githubusercontent.com/AleR111/Vue/hm4/fetch_data/',
+        costsList: {},
     },
     mutations: {
         setCostsList(state, payload) {
-            state.costsList = payload
+            // state.costsList = payload
+            state.costsList = {...state.costsList, ...payload}
+            console.log(state.costsList)
         }
     },
     getters: {
-        getCostsList: state => state.costsList
+        getCostsListPage: state => (page) => {
+            if (state.costsList[page]) return state.costsList[page];
+        }
     },
     actions: {
         fetchCostsList({commit}, url) {
