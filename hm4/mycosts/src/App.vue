@@ -27,11 +27,8 @@ export default {
     return {
       urlCostsList: 'https://raw.githubusercontent.com/AleR111/Vue/hm4/fetch_data',
       urlAmountPages: 'https://raw.githubusercontent.com/AleR111/Vue/hm4/fetch_data/amountPages.json',
-      costsList: [],
       page: 'page1',
       showAddForm: false,
-      amountRows: 5,
-      // amountPages: null,
     }
   },
   methods: {
@@ -42,43 +39,13 @@ export default {
       'fetchCostsList',
       'fetchAmountPages'
     ]),
-    fetchData() {
-      return [
-        {
-          date: "21.06.2021",
-          category: "Food",
-          value: 580
-        },
-        {
-          date: "22.06.2021",
-          category: "Internet",
-          value: 400
-        },
-        {
-          date: "25.06.2021",
-          category: "Food",
-          value: 300
-        },
-        {
-          date: "27.06.2021",
-          category: "Food",
-          value: 450
-        },
-      ]
-    },
     addData(data) {
       this.costsList = [data, ...this.costsList];
-      this.setAmountPages();
       this.showPage(1)
     },
-    setAmountPages() {
-      this.amountPages = this.amountPages = Math.ceil(this.costsList.length / this.amountRows)
-    },
     showPage(num) {
-
       this.fetchCostsList(`page${num}`)
       this.page = `page${num}`
-
     }
   },
   computed: {
@@ -95,9 +62,6 @@ export default {
     }
   },
   created() {
-    this.costsList = this.fetchData();
-    this.setAmountPages();
-    this.showPage(1)
     this.fetchCostsList(`page1`)
     this.fetchAmountPages(this.urlAmountPages)
   }

@@ -30,7 +30,7 @@ export default new Vuex.Store({
     },
     actions: {
         fetchCostsList({commit, state}, page) {
-            if (state.costsList[page]) return 
+            if (state.costsList[page]) return
             fetch(`${state.url}/${page}.json`)
                 .then(resolve => resolve.json())
                 .then(data => commit('setCostsList', data))
