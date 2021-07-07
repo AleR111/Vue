@@ -10,6 +10,7 @@ export default new Vuex.Store({
         urlCategory: 'https://raw.githubusercontent.com/AleR111/Vue/hm4/fetch_data/categoryList.json',
         urlAmountPages: 'https://raw.githubusercontent.com/AleR111/Vue/hm4/fetch_data/amountPages.json',
         costsList: {},
+        costsList2: [],
         categoryList: [],
         amountPages: {}
     },
@@ -23,11 +24,29 @@ export default new Vuex.Store({
             state.amountPages = payload
         },
         setNewData(state, payload) {
-            console.log(payload)
-            console.log(state.costsList)
+
             payload.id = 1
             state.costsList.page1.unshift(payload)
-            // if (state.costsList.page1.length > 2) state.costsList.page2 = state.costsList.page1.pop()
+
+            for(const el in state.costsList) {
+                state.costsList2.push(...state.costsList[el])
+            }
+            state.costsList = {}
+
+            state.costsList2.forEach((elem, idx) => {
+                const obj = {}
+                obj.id = idx + 1
+                obj.category = elem.category
+                obj.date = elem.date
+                obj.value = elem.value
+
+                const pageNum = Math.ceil((idx + 1) / 3)
+
+                if (!state.costsList[`page${pageNum}`]) {
+                    state.costsList[`page${pageNum}`] = [obj]
+                } else state.costsList[`page${pageNum}`].push(obj)
+            })
+            state.costsList2 = []
         },
         setCategoryList(state, payload) {
             state.categoryList = payload
