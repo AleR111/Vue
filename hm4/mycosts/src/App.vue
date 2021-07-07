@@ -3,7 +3,7 @@
     <header class="header">My personal coasts</header>
     <button class="btn-show" @click="showAddForm = !showAddForm"><span class="text-span">ADD NEW COST</span> <span
         class="plus">+</span></button>
-    <AddForm v-show="showAddForm" @addData="addData" :categoryList="CategoryList"/>
+    <AddForm v-show="showAddForm" @addData="addData" :categoryList="categoryList"/>
     <CostsList :costsList="displayCostsList"/>
     <Pagination :amountPages="amountPages" @showPage="showPage"/>
   </div>
@@ -25,8 +25,6 @@ export default {
   },
   data() {
     return {
-      urlCostsList: 'https://raw.githubusercontent.com/AleR111/Vue/hm4/fetch_data',
-      urlAmountPages: 'https://raw.githubusercontent.com/AleR111/Vue/hm4/fetch_data/amountPages.json',
       page: 'page1',
       showAddForm: false,
     }
@@ -38,6 +36,7 @@ export default {
     ...mapActions([
       'fetchCostsList',
       'fetchAmountPages',
+      'fetchCategoryList'
     ]),
     addData(data) {
       this.setNewData(data)
@@ -67,7 +66,8 @@ export default {
   },
   created() {
     this.fetchCostsList(`page1`)
-    this.fetchAmountPages(this.urlAmountPages)
+    this.fetchAmountPages()
+    this.fetchCategoryList()
   }
 }
 </script>

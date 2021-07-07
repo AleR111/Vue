@@ -7,7 +7,8 @@ export default new Vuex.Store({
 
     state: {
         url: 'https://raw.githubusercontent.com/AleR111/Vue/hm4/fetch_data',
-        urlCategory: '',
+        urlCategory: 'https://raw.githubusercontent.com/AleR111/Vue/hm4/fetch_data/categoryList.json',
+        urlAmountPages: 'https://raw.githubusercontent.com/AleR111/Vue/hm4/fetch_data/amountPages.json',
         costsList: {},
         categoryList: [],
         amountPages: {}
@@ -48,8 +49,8 @@ export default new Vuex.Store({
                 .then(resolve => resolve.json())
                 .then(data => commit('setCostsList', data))
         },
-        fetchAmountPages({commit}, url) {
-            fetch(url)
+        fetchAmountPages({commit, state}) {
+            fetch(state.urlAmountPages)
                 .then(resolve => resolve.json())
                 .then(data => commit('setAmountPages', data))
         },
