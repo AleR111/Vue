@@ -3,9 +3,9 @@
     <header class="header">My personal coasts</header>
     <button class="btn-show" @click="showAddForm = !showAddForm"><span class="text-span">ADD NEW COST</span> <span
         class="plus">+</span></button>
-    <AddForm v-show="showAddForm" @addData="addData"/>
+    <AddForm v-show="showAddForm" @addData="addData" :categoryList="CategoryList"/>
     <CostsList :costsList="displayCostsList"/>
-    <Pagination :amountPages="getAmountPages1" @showPage="showPage"/>
+    <Pagination :amountPages="amountPages" @showPage="showPage"/>
   </div>
 </template>
 
@@ -33,14 +33,14 @@ export default {
   },
   methods: {
     ...mapMutations([
-      '',
+      'setNewData',
     ]),
     ...mapActions([
       'fetchCostsList',
-      'fetchAmountPages'
+      'fetchAmountPages',
     ]),
     addData(data) {
-      this.costsList = [data, ...this.costsList];
+      this.setNewData(data)
       this.showPage(1)
     },
     showPage(num) {
@@ -51,14 +51,18 @@ export default {
   computed: {
     ...mapGetters([
       'getCostsListPage',
-      'getAmountPages'
+      'getAmountPages',
+      'getCategoryList'
     ]),
     displayCostsList() {
       return this.getCostsListPage(this.page)
     },
-    getAmountPages1() {
+    amountPages() {
       console.log(this.getAmountPages)
       return this.getAmountPages
+    },
+    categoryList() {
+      return this.getCategoryList
     }
   },
   created() {

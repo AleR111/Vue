@@ -7,7 +7,9 @@ export default new Vuex.Store({
 
     state: {
         url: 'https://raw.githubusercontent.com/AleR111/Vue/hm4/fetch_data',
+        urlCategory: '',
         costsList: {},
+        categoryList: [],
         amountPages: {}
     },
     mutations: {
@@ -18,6 +20,16 @@ export default new Vuex.Store({
         },
         setAmountPages(state, payload) {
             state.amountPages = payload
+        },
+        setNewData(state, payload) {
+            console.log(payload)
+            console.log(state.costsList)
+            payload.id = 1
+            state.costsList.page1.unshift(payload)
+            // if (state.costsList.page1.length > 2) state.costsList.page2 = state.costsList.page1.pop()
+        },
+        setCategoryList(state, payload) {
+            state.categoryList = payload
         }
     },
     getters: {
@@ -25,8 +37,9 @@ export default new Vuex.Store({
             if (state.costsList[page]) return state.costsList[page];
         },
         getAmountPages: state => {
-          return state.amountPages.amount
-        }
+            return state.amountPages.amount
+        },
+        getCategoryList: state => state.categoryList
     },
     actions: {
         fetchCostsList({commit, state}, page) {
@@ -40,6 +53,10 @@ export default new Vuex.Store({
                 .then(resolve => resolve.json())
                 .then(data => commit('setAmountPages', data))
         },
-
+        fetchCategoryList({commit, state}) {
+            fetch(state.urlCategory)
+                .then(resolve => resolve.json())
+                .then(data => commit('setCategoryList', data))
+        }
     }
 })

@@ -1,7 +1,10 @@
 <template>
   <div>
     <form action="#" class="form">
-      <input class="input" type="text" placeholder="Payment description" v-model="category">
+      <input class="input" type="text" placeholder="Payment description" list="category_list" v-model="category">
+      <datalist id="category_list">
+        <option v-for="elem in catagoryList" :value="elem"></option>
+      </datalist>
       <input class="input" type="number" placeholder="Payment amount" v-model="value">
       <input class="input" type="date" placeholder="Payment date" v-model="date">
       <button class="btn-form" type="button" @click="addPayment"><span class="text-span">ADD</span> <span class="plus">+</span></button>
@@ -12,6 +15,7 @@
 <script>
 export default {
   name: "AddForm",
+  props: ['categoryList'],
   data() {
     return {
       category: null,
