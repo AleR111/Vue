@@ -13,6 +13,8 @@
 </template>
 
 <script>
+import {mapMutations} from 'vuex'
+
 export default {
   name: "AddForm",
   props: ['categoryList'],
@@ -24,6 +26,9 @@ export default {
     }
   },
   methods: {
+    ...mapMutations([
+      'setNewCategory',
+    ]),
     formatDate(date) {
       let day = date.getDate();
       if(day < 10) day = "0" + day
@@ -46,6 +51,10 @@ export default {
       }
       console.log(data);
       this.$emit('addData', data)
+      this.addNewCategory()
+    },
+    addNewCategory() {
+      this.setNewCategory(this.category)
     }
   }
 }

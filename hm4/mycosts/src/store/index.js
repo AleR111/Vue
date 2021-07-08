@@ -56,6 +56,9 @@ export default new Vuex.Store({
         },
         setCategoryList(state, payload) {
             state.categoryList = payload
+        },
+        setNewCategory(state, payload) {
+            if (!state.categoryList.find(elem => elem === payload)) state.categoryList.unshift(payload)
         }
     },
     getters: {
