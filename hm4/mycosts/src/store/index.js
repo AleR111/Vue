@@ -10,7 +10,7 @@ export default new Vuex.Store({
         urlCategory: 'https://raw.githubusercontent.com/AleR111/Vue/hm4/fetch_data/categoryList.json',
         urlAmountPages: 'https://raw.githubusercontent.com/AleR111/Vue/hm4/fetch_data/amountPages.json',
         costsList: {},
-        costsList2: [],
+        costsListTemporary: [],
         categoryList: [],
         amountPages: {},
         amountPagesNew: null,
@@ -29,17 +29,18 @@ export default new Vuex.Store({
             payload.id = 1
             state.costsList.page1.unshift(payload)
 
-            for(const el in state.costsList) {
-                state.costsList2.push(...state.costsList[el])
+            for (const el in state.costsList) {
+                state.costsListTemporary.push(...state.costsList[el])
             }
             state.costsList = {}
 
-            state.costsList2.forEach((elem, idx) => {
-                const obj = {}
-                obj.id = idx + 1
-                obj.category = elem.category
-                obj.date = elem.date
-                obj.value = elem.value
+            state.costsListTemporary.forEach((elem, idx) => {
+                const obj = {
+                    id: idx + 1,
+                    category: elem.category,
+                    date: elem.date,
+                    value: elem.value,
+                }
 
                 const pageNum = Math.ceil((idx + 1) / 3)
 
@@ -47,11 +48,11 @@ export default new Vuex.Store({
                     state.costsList[`page${pageNum}`] = [obj]
                 } else state.costsList[`page${pageNum}`].push(obj)
             })
-            console.log(Math.ceil((state.costsList2.length) / 3))
+
             if (!state.amountPagesNew) state.amountPagesNew = state.amountPages.amount
-            state.amountPages.amount = state.amountPagesNew + Math.ceil((state.costsList2.length) / 3) - 1
-            console.log(state.amountPages)
-            state.costsList2 = []
+            state.amountPages.amount = state.amountPagesNew + Math.ceil((state.costsListTemporary.length) / 3) - 1
+
+            state.costsListTemporary = []
         },
         setCategoryList(state, payload) {
             state.categoryList = payload
