@@ -12,7 +12,8 @@ export default new Vuex.Store({
         costsList: {},
         costsList2: [],
         categoryList: [],
-        amountPages: {}
+        amountPages: {},
+        amountPagesNew: null,
     },
     mutations: {
         setCostsList(state, payload) {
@@ -46,6 +47,10 @@ export default new Vuex.Store({
                     state.costsList[`page${pageNum}`] = [obj]
                 } else state.costsList[`page${pageNum}`].push(obj)
             })
+            console.log(Math.ceil((state.costsList2.length) / 3))
+            if (!state.amountPagesNew) state.amountPagesNew = state.amountPages.amount
+            state.amountPages.amount = state.amountPagesNew + Math.ceil((state.costsList2.length) / 3) - 1
+            console.log(state.amountPages)
             state.costsList2 = []
         },
         setCategoryList(state, payload) {

@@ -57,7 +57,6 @@ export default {
       return this.getCostsListPage(this.page)
     },
     amountPages() {
-      console.log(this.getAmountPages)
       return this.getAmountPages
     },
     categoryList() {
