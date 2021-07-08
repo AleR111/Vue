@@ -26,7 +26,6 @@ export default new Vuex.Store({
         },
         setNewData(state, payload) {
 
-            payload.id = 1
             state.costsList.page1.unshift(payload)
 
             for (const el in state.costsList) {
