@@ -4,6 +4,9 @@
     <button class="btn-show" @click="showAddForm = !showAddForm"><span class="text-span">ADD NEW COST</span> <span
         class="plus">+</span></button>
     <AddForm v-show="showAddForm" @addData="addData" :categoryList="categoryList"/>
+    <div class="cost-list">
+      <a href="#" @click="setPayment('')"></a>
+    </div>
     <CostsList :costsList="displayCostsList"/>
     <Pagination :amountPages="amountPages" @showPage="showPage"/>
   </div>
@@ -15,6 +18,7 @@ import CostsList from "./components/CostsList";
 import AddForm from './components/AddForm';
 import Pagination from './components/Pagination'
 import {mapMutations, mapGetters, mapActions} from 'vuex'
+
 
 export default {
   name: 'App',
@@ -45,6 +49,14 @@ export default {
     showPage(num) {
       this.fetchCostsList(`page${num}`)
       this.page = `page${num}`
+    },
+    setPayment(param) {
+      this.$router.push({
+        name: param,
+        params: {
+
+        }
+      })
     }
   },
   computed: {
