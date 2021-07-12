@@ -3,11 +3,11 @@
     <header class="header">My personal coasts</header>
     <button class="btn-show" @click="showAddForm = !showAddForm"><span class="text-span">ADD NEW COST</span> <span
         class="plus">+</span></button>
-    <AddForm v-show="showAddForm" @addData="addData" :categoryList="categoryList"/>
+    <AddForm v-if="showAddForm" @addData="addData" :categoryList="categoryList"/>
     <div class="cost-list">
-      <router-link to="/addForm/Food/200">Food=200</router-link> /
-      <router-link to="/addForm/Transport/50">Transport=50</router-link> /
-      <router-link to="/addForm/Entertainment/2000">Entertainment=2000</router-link> /
+      <a href="#" @click="setPayment('addForm', 'Entertainment', 2000)">Entertainment=2000</a> /
+      <a href="#" @click="setPayment('addForm', 'Transport', 50)">Transport=50</a> /
+      <a href="#" @click="setPayment('addForm', 'Food', 200)">Food=200</a>
     </div>
     <CostsList :costsList="displayCostsList"/>
     <Pagination :amountPages="amountPages" @showPage="showPage"/>
@@ -51,7 +51,17 @@ export default {
     showPage(num) {
       this.fetchCostsList(`page${num}`)
       this.page = `page${num}`
-    }
+    },
+    setPayment(page, category, value){
+      this.$router.push({
+        name: page,
+        params: {
+          category: category,
+          value: value
+        }
+      })
+      this.showAddForm = true
+    },
   },
   computed: {
     ...mapGetters([
