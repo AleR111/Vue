@@ -20,8 +20,8 @@ export default {
   props: ['categoryList'],
   data() {
     return {
-      category: null,
-      value: null,
+      category: this.$route.params.category,
+      value: this.$route.params.value,
       date: null
     }
   },

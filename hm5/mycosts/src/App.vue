@@ -5,7 +5,9 @@
         class="plus">+</span></button>
     <AddForm v-show="showAddForm" @addData="addData" :categoryList="categoryList"/>
     <div class="cost-list">
-      <a href="#" @click="setPayment('')"></a>
+      <router-link to="/addForm/Food/200">Food=200</router-link> /
+      <router-link to="/addForm/Transport/50">Transport=50</router-link> /
+      <router-link to="/addForm/Entertainment/2000">Entertainment=2000</router-link> /
     </div>
     <CostsList :costsList="displayCostsList"/>
     <Pagination :amountPages="amountPages" @showPage="showPage"/>
@@ -49,14 +51,6 @@ export default {
     showPage(num) {
       this.fetchCostsList(`page${num}`)
       this.page = `page${num}`
-    },
-    setPayment(param) {
-      this.$router.push({
-        name: param,
-        params: {
-
-        }
-      })
     }
   },
   computed: {
