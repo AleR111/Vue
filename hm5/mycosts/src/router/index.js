@@ -10,6 +10,11 @@ export default new Router({
 
     routes: [
         {
+            path: '/addForm/:category',
+            name: 'addForm',
+            component: AddForm
+        },
+        {
             path: '/addForm/:category/:value',
             name: 'addForm',
             component: AddForm

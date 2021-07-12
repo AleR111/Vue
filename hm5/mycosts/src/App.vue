@@ -7,7 +7,7 @@
     <div class="cost-list">
       <a href="#" @click="setPayment('addForm', 'Entertainment', 2000)">Entertainment=2000</a> /
       <a href="#" @click="setPayment('addForm', 'Transport', 50)">Transport=50</a> /
-      <a href="#" @click="setPayment('addForm', 'Food', 200)">Food=200</a>
+      <a href="#" @click="setPayment('addForm', 'Food')">Food=200</a>
     </div>
     <CostsList :costsList="displayCostsList"/>
     <Pagination :amountPages="amountPages" @showPage="showPage"/>
