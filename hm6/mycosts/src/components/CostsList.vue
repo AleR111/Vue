@@ -23,7 +23,7 @@
         <td class="td">{{ elem.category }}</td>
         <td class="td">{{ elem.value }}</td>
         <td class="td">
-          <button class="additional-btn">&#8942;</button>
+          <button class="additional-btn" @click="showAdditionalSettings">&#8942;</button>
         </td>
       </tr>
       </tbody>
@@ -40,6 +40,13 @@ export default {
       default: () => [],
     }
   },
+  methods: {
+    showAdditionalSettings() {
+      this.$modal.show({
+        componentName: 'EditCosts'
+      })
+    }
+  }
 }
 </script>
 

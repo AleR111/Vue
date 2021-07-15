@@ -11,7 +11,7 @@
     </div>
     <CostsList :costsList="displayCostsList"/>
     <Pagination :amountPages="amountPages" @showPage="showPage"/>
-    <ModalWindow/>
+    <ModalWindow :settings="settings"/>
   </div>
 </template>
 
@@ -36,6 +36,7 @@ export default {
     return {
       page: 'page1',
       showAddForm: false,
+      settings: {}
     }
   },
   methods: {
@@ -65,6 +66,9 @@ export default {
       })
       this.showAddForm = true
     },
+    onShow(param) {
+      this.settings = param.settings
+    }
   },
   computed: {
     ...mapGetters([
@@ -86,6 +90,9 @@ export default {
     this.fetchCostsList(`page1`)
     this.fetchAmountPages()
     this.fetchCategoryList()
+  },
+  mounted() {
+    this.$modal.EventBus.$on('show', this.onShow)
   }
 }
 </script>
