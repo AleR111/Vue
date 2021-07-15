@@ -11,6 +11,7 @@
     </div>
     <CostsList :costsList="displayCostsList"/>
     <Pagination :amountPages="amountPages" @showPage="showPage"/>
+    <EditCosts></EditCosts>
   </div>
 </template>
 
@@ -19,6 +20,7 @@
 import CostsList from "./components/CostsList";
 import AddForm from './components/AddForm';
 import Pagination from './components/Pagination'
+import EditCosts from "./components/EditCosts";
 import {mapMutations, mapGetters, mapActions} from 'vuex'
 
 
@@ -27,7 +29,8 @@ export default {
   components: {
     CostsList,
     AddForm,
-    Pagination
+    Pagination,
+    EditCosts
   },
   data() {
     return {
