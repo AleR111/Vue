@@ -1,17 +1,27 @@
 <template>
   <div class="modal-wrap">
-      <component is="nameModal ==== qwe"/>
+    <component :is="settings.componentName"/>
   </div>
 </template>
 
 <script>
+import EditCosts from "./EditCosts";
+
 export default {
   name: "ModalWindow",
 
-  data() {
-    return {
-
+  components: {
+    EditCosts
+  },
+  props: {
+    settings: {
+      type: Object
     }
+  },
+
+
+  data() {
+    return {}
   }
 }
 </script>

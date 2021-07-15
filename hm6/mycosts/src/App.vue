@@ -11,7 +11,7 @@
     </div>
     <CostsList :costsList="displayCostsList"/>
     <Pagination :amountPages="amountPages" @showPage="showPage"/>
-    <EditCosts></EditCosts>
+    <ModalWindow/>
   </div>
 </template>
 
@@ -20,7 +20,7 @@
 import CostsList from "./components/CostsList";
 import AddForm from './components/AddForm';
 import Pagination from './components/Pagination'
-import EditCosts from "./components/EditCosts";
+
 import {mapMutations, mapGetters, mapActions} from 'vuex'
 
 
@@ -30,7 +30,7 @@ export default {
     CostsList,
     AddForm,
     Pagination,
-    EditCosts
+    ModalWindow: () => import ('./components/ModalWindow'),
   },
   data() {
     return {
@@ -55,7 +55,7 @@ export default {
       this.fetchCostsList(`page${num}`)
       this.page = `page${num}`
     },
-    setPayment(page, category, value){
+    setPayment(page, category, value) {
       this.$router.push({
         name: page,
         params: {

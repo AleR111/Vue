@@ -22,6 +22,9 @@
         <td class="td">{{ elem.date }}</td>
         <td class="td">{{ elem.category }}</td>
         <td class="td">{{ elem.value }}</td>
+        <td class="td">
+          <button class="additional-btn">&#8942;</button>
+        </td>
       </tr>
       </tbody>
     </table>
@@ -59,5 +62,17 @@ export default {
 
 .tr:nth-of-type(even) {
   background-color: rgba(201, 201, 232, 0.43);
+}
+
+.additional-btn {
+  font-size: 20px;
+  font-weight: 700;
+  background-color: unset;
+  border: none;
+}
+
+.additional-btn:hover {
+  cursor: pointer;
+  color: #3e99a1;
 }
 </style>
