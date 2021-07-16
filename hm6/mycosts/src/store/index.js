@@ -60,11 +60,9 @@ export default new Vuex.Store({
             if (!state.categoryList.find(elem => elem === payload)) state.categoryList.unshift(payload)
         },
         deleteCostData(store, payload) {
-            console.log(payload)
             for (const el in store.costsList) {
                 const index = store.costsList[el].findIndex(elem => elem.id === payload)
-                store.costsList[el].splice(index, 1)
-                console.log(store.costsList, index)
+                if (index !== -1) store.costsList[el].splice(index, 1)
             }
         }
     },
