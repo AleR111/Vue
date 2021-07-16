@@ -25,9 +25,9 @@ export default new Vuex.Store({
             state.amountPages = payload
         },
         setNewData(state, payload) {
-
             state.costsList.page1.unshift(payload)
-
+        },
+        updateOrderCostList(state) {// изменяет порядок покупок ставя последнюю покупку на первую позицию списка
             for (const el in state.costsList) {
                 state.costsListTemporary.push(...state.costsList[el])
             }
@@ -93,6 +93,20 @@ export default new Vuex.Store({
             fetch(state.urlCategory)
                 .then(resolve => resolve.json())
                 .then(data => commit('setCategoryList', data))
+        },
+        addDataServer({commit}, costData) { //имитация работы с сервером
+            new Promise(resolve => {
+                setTimeout(() => resolve(1), 100)
+            })
+                .then(data => {
+                if (data === 1) commit('setNewData', costData)
+            })
+                .then(() => commit('updateOrderCostList'))
+
+        },
+        deleteCostData({commit}, data) {
+            commit('deleteCostData', data);
+            commit('updateOrderCostList');
         }
     }
 })

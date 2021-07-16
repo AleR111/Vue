@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import {mapMutations} from 'vuex'
+import {mapActions} from 'vuex'
 
 export default {
   name: "EditCosts",
@@ -14,9 +14,8 @@ export default {
   props: ['costId'],
 
   methods: {
-    ...mapMutations([
+    ...mapActions([
       'deleteCostData',
-        'setNewData'
     ]),
     deleteCost() {
       this.deleteCostData(this.costId)

@@ -46,10 +46,11 @@ export default {
     ...mapActions([
       'fetchCostsList',
       'fetchAmountPages',
-      'fetchCategoryList'
+      'fetchCategoryList',
+      'addDataServer'
     ]),
     addData(data) {
-      this.setNewData(data)
+      this.addDataServer(data)
       this.showPage(1)
     },
     showPage(num) {
