@@ -16,9 +16,10 @@ export default {
   methods: {
     ...mapMutations([
       'deleteCostData',
+        'setNewData'
     ]),
     deleteCost() {
-      this.deleteCostData()
+      this.deleteCostData(this.costId)
       console.log(this.costId)
     }
   }
