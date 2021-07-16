@@ -58,6 +58,9 @@ export default new Vuex.Store({
         },
         setNewCategory(state, payload) {
             if (!state.categoryList.find(elem => elem === payload)) state.categoryList.unshift(payload)
+        },
+        deleteCostData() {
+            console.log(313123)
         }
     },
     getters: {

@@ -1,6 +1,6 @@
 <template>
   <div class="modal-wrap">
-    <component :is="settings.componentName"/>
+    <component :is="settings.componentName" :costId="settings.costId"/>
   </div>
 </template>
 

@@ -1,13 +1,27 @@
 <template>
   <div class="wrapper">
     <button class="button edit-btn">Edit</button>
-    <button class="button delete-btn">Delete</button>
+    <button class="button delete-btn" @click="deleteCost">Delete</button>
   </div>
 </template>
 
 <script>
+import {mapMutations} from 'vuex'
+
 export default {
-  name: "EditCosts"
+  name: "EditCosts",
+
+  props: ['costId'],
+
+  methods: {
+    ...mapMutations([
+      'deleteCostData',
+    ]),
+    deleteCost() {
+      this.deleteCostData()
+      console.log(this.costId)
+    }
+  }
 }
 </script>
 
