@@ -2,9 +2,12 @@
   <div>
     <form action="#" class="form" @submit.prevent="saveChanges">
       <input class="input" type="text" name="date" :value="setData.date">
-      <input class="input" type="text" name="category" :value="setData.category">
+      <input class="input" type="text" name="category" list="category_list" :value="setData.category">
+      <datalist id="category_list">
+        <option v-for="(elem, idx) in categoryList" :key="idx" :value="elem" :label="elem"></option>
+      </datalist>
       <input class="input" type="number" name="value" :value="setData.value">
-      <button class="btn-form" type="submit" ><span class="text-span">Edit</span></button>
+      <button class="btn-form" type="submit"><span class="text-span">Edit</span></button>
     </form>
   </div>
 </template>
@@ -19,8 +22,9 @@ export default {
 
   methods: {
     ...mapMutations([
-        'updateCostData'
+      'updateCostData'
     ]),
+
     saveChanges(event) {
       let {date, category, value} = event.target.elements;
 
@@ -39,12 +43,16 @@ export default {
 
   computed: {
     ...mapGetters([
-      'getCostDataId'
+      'getCostDataId',
+      'getCategoryList'
     ]),
 
     setData() {
       return this.getCostDataId(this.page, this.costId)
-    }
+    },
+    categoryList() {
+      return this.getCategoryList
+    },
   },
 
 }
