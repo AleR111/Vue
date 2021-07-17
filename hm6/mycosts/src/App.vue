@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" @click="hideModalWindow">
     <header class="header">My personal coasts</header>
     <button class="btn-show" @click="showAddForm = !showAddForm"><span class="text-span">ADD NEW COST</span> <span
         class="plus">+</span></button>
@@ -70,6 +70,12 @@ export default {
     onShow(param) {
       this.settings = param.settings
       this.settings.page = this.page
+    },
+    hideModalWindow(e) {
+      if (!e.target.closest('#modal-window') && e.target.classList.value !== 'additional-btn') {
+        console.log(1111)
+        this.settings = {}
+      }
     }
   },
   computed: {
