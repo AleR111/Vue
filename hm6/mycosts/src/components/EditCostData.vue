@@ -1,10 +1,10 @@
 <template>
   <div>
-    <form action="#" class="form">
-      <input class="input" type="text" v-model="setData.date">
-      <input class="input" type="text" v-model="setData.category">
-      <input class="input" type="number" v-model="setData.value">
-      <button class="btn-form" type="button" @click="saveChanges"><span class="text-span">Edit</span></button>
+    <form action="#" class="form" @submit.prevent="saveChanges">
+      <input class="input" type="text" name="date" :value="setData.date">
+      <input class="input" type="text" name="category" :value="setData.category">
+      <input class="input" type="number" name="value" :value="setData.value">
+      <button class="btn-form" type="submit" ><span class="text-span">Edit</span></button>
     </form>
   </div>
 </template>
@@ -26,9 +26,15 @@ export default {
   },
 
   methods: {
-    saveChanges() {
-      console.log(this.costId)
-    }
+    saveChanges(event) {
+      let {date, category, value} = event.target.elements;
+
+      this.date = date.value;
+      this.category = category.value;
+      this.value = value.value;
+
+      console.log(this.value)
+    },
   },
 
   computed: {
@@ -38,7 +44,6 @@ export default {
 
     setData() {
       return this.getCostDataId(this.page, this.costId)
-
     }
   },
 
