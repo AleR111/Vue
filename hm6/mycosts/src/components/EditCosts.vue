@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="btn-box">
     <button class="button edit-btn" @click="showEditCostData">Edit</button>
     <button class="button delete-btn" @click="deleteCost">Delete</button>
   </div>
@@ -31,6 +31,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.btn-box {
+  width: 120px;
+}
 .button {
   z-index: 3;
   text-align: left;

@@ -1,7 +1,7 @@
 <template>
-  <div >
+
     <component class="modal-wrap wrapper" :is="settings.componentName" :costId="settings.costId"/>
-  </div>
+
 </template>
 
 <script>
@@ -28,7 +28,7 @@ export default {
 
 <style lang="scss" scoped>
 .wrapper {
-  width: 120px;
+  width: 350px;
   display: flex;
   flex-direction: column;
   box-shadow: 1px -1px 4px 2px #c0c0c0;
