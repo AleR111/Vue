@@ -11,7 +11,7 @@ import {mapActions} from 'vuex'
 export default {
   name: "EditCosts",
 
-  props: ['costId'],
+  props: ['costId', 'position'],
 
   methods: {
     ...mapActions([
@@ -20,7 +20,8 @@ export default {
     showEditCostData() {
       this.$modal.show({
         componentName: 'EditCostData',
-        costId: this.costId
+        costId: this.costId,
+        positionWindow: this.position
       })
     },
     deleteCost() {
