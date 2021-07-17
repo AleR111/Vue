@@ -71,6 +71,9 @@ export default {
       this.settings = param.settings
       this.settings.page = this.page
     },
+    onHide() {
+      this.settings = {}
+    },
     hideModalWindow(e) {
       if (!e.target.closest('#modal-window') && e.target.classList.value !== 'additional-btn') {
         console.log(1111)
@@ -101,6 +104,7 @@ export default {
   },
   mounted() {
     this.$modal.EventBus.$on('show', this.onShow)
+    this.$modal.EventBus.$on('hide', this.onHide)
   }
 }
 </script>

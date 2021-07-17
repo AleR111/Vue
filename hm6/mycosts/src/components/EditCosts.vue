@@ -26,6 +26,7 @@ export default {
     },
     deleteCost() {
       this.deleteCostData(this.costId)
+      this.$modal.hide()
       console.log(this.costId)
     }
   }

@@ -33,6 +33,7 @@ export default {
       }
 
       this.updateCostData(data)
+      this.$modal.hide()
     },
   },
 
