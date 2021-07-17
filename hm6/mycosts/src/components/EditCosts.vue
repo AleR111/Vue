@@ -19,7 +19,8 @@ export default {
     ]),
     showEditCostData() {
       this.$modal.show({
-        componentName: 'EditCostData'
+        componentName: 'EditCostData',
+        costId: this.costId
       })
     },
     deleteCost() {

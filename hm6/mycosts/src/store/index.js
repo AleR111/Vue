@@ -73,7 +73,8 @@ export default new Vuex.Store({
         getAmountPages: state => {
             return state.amountPages.amount
         },
-        getCategoryList: state => state.categoryList
+        getCategoryList: state => state.categoryList,
+        getCostDataId: state => (page, id) => state.costsList[page].find(elem => elem.id === id),
     },
     actions: {
         fetchCostsList({commit, state}, page) {

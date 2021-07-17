@@ -69,6 +69,7 @@ export default {
     },
     onShow(param) {
       this.settings = param.settings
+      this.settings.page = this.page
     }
   },
   computed: {

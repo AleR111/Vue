@@ -1,17 +1,51 @@
 <template>
-<div>
+  <div>
     <form action="#" class="form">
-      <input class="input" type="text">
-      <input class="input" type="number">
-      <input class="input" type="date">
-      <button class="btn-form" type="button"><span class="text-span">Edit</span></button>
+      <input class="input" type="text" v-model="setData.date">
+      <input class="input" type="text" v-model="setData.category">
+      <input class="input" type="number" v-model="setData.value">
+      <button class="btn-form" type="button" @click="saveChanges"><span class="text-span">Edit</span></button>
     </form>
-</div>
+  </div>
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
+
 export default {
-  name: "EditCostData"
+  name: "EditCostData",
+
+  props: ['costId', 'page'],
+
+  data() {
+    return {
+      date: null,
+      category: null,
+      value: null
+    }
+  },
+
+  methods: {
+    saveChanges() {
+      console.log(this.costId)
+    }
+  },
+
+  computed: {
+    ...mapGetters([
+      'getCostDataId'
+    ]),
+
+    setData() {
+      return this.getCostDataId(this.page, this.costId)
+
+    }
+  },
+
+  mounted() {
+    console.log(this.page)
+  }
+
 }
 </script>
 
@@ -22,10 +56,12 @@ export default {
   border-spacing: 0;
   border-collapse: collapse;
 }
+
 .input {
   width: 100%;
   flex-grow: 1;
 }
+
 .btn-form {
   border: none;
   background-color: rgba(212, 0, 25, 0.49);
