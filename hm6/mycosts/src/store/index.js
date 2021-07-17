@@ -64,6 +64,12 @@ export default new Vuex.Store({
                 const index = store.costsList[el].findIndex(elem => elem.id === payload)
                 if (index !== -1) store.costsList[el].splice(index, 1)
             }
+        },
+        updateCostData(state, payload) {
+            let cost = state.costsList[payload.page].find(elem => elem.id === payload.id)
+            cost.value = payload.value
+            cost.category = payload.category
+            cost.date = payload.date
         }
     },
     getters: {

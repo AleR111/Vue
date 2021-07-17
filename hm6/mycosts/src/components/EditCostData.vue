@@ -10,30 +10,29 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
+import {mapMutations, mapGetters} from 'vuex'
 
 export default {
   name: "EditCostData",
 
   props: ['costId', 'page'],
 
-  data() {
-    return {
-      date: null,
-      category: null,
-      value: null
-    }
-  },
-
   methods: {
+    ...mapMutations([
+        'updateCostData'
+    ]),
     saveChanges(event) {
       let {date, category, value} = event.target.elements;
 
-      this.date = date.value;
-      this.category = category.value;
-      this.value = value.value;
+      const data = {
+        page: this.page,
+        id: this.costId,
+        date: date.value,
+        category: category.value,
+        value: value.value
+      }
 
-      console.log(this.value)
+      this.updateCostData(data)
     },
   },
 
@@ -46,10 +45,6 @@ export default {
       return this.getCostDataId(this.page, this.costId)
     }
   },
-
-  mounted() {
-    console.log(this.page)
-  }
 
 }
 </script>
