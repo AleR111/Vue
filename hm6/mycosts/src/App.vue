@@ -11,7 +11,9 @@
     </div>
     <CostsList :costsList="displayCostsList"/>
     <Pagination :amountPages="amountPages" @showPage="showPage"/>
-    <ModalWindow :settings="settings"/>
+    <transition name="fade">
+      <ModalWindow v-if="showModal" :settings="settings"/>
+    </transition>
   </div>
 </template>
 
@@ -36,6 +38,7 @@ export default {
     return {
       page: 'page1',
       showAddForm: false,
+      showModal: false,
       settings: {}
     }
   },
@@ -68,16 +71,18 @@ export default {
       this.showAddForm = true
     },
     onShow(param) {
+      this.showModal = true
       this.settings = param.settings
       this.settings.page = this.page
     },
     onHide() {
+      this.showModal = false
       this.settings = {}
     },
     hideModalWindow(e) {
       if (!e.target.closest('#modal-window') && e.target.classList.value !== 'additional-btn') {
         console.log(1111)
-        this.settings = {}
+        this.$modal.hide()
       }
     }
   },
@@ -146,4 +151,13 @@ export default {
   font-size: 20px;
   padding-left: 16px;
 }
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.4s;
+}
+
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+
 </style>
