@@ -45,6 +45,7 @@
       <button v-for="operand in operands"
               @click="calculate(operand)"
               :key="operand"
+              :name="operand"
               v-bind:title="operand"
       >
         {{ operand }}
