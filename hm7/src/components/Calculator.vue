@@ -12,10 +12,12 @@
     <input type="number"
            v-model.number="operand1"
            placeholder="operand1"
+           name="operand1"
     />
     <input type="number"
            v-model.number="operand2"
            placeholder="operand2"
+           name="operand2"
     />
     <div>= {{ result }}</div>
     <div>= fib {{ fibResult }}</div>

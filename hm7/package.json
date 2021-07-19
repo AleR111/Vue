@@ -19,7 +19,7 @@
     },
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "**/*.{js,Vue}",
+      "**/*.{js,vue}",
       "!**/node_modules/**"
     ]
   },
