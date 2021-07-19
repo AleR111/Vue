@@ -58,7 +58,8 @@
     <div v-show="checkedKeyboard" class="screen-keyboard">
       <button v-for='btn in keyButton'
               @click="enterOperand(btn)"
-              :key='btn'>
+              :key='btn'
+              :name='btn'>
         {{ btn }}
       </button>
     </div>
