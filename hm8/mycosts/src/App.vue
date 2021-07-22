@@ -3,9 +3,11 @@
     <v-app-bar
       app
       dark
+      flat
     >
-      <v-btn to="/home">Home</v-btn>
-      <v-btn to="/about">About</v-btn>
+      <v-btn depressed :ripple="false" to="/home">Home</v-btn>
+      <v-spacer></v-spacer>
+      <v-btn depressed :ripple="false" to="/about">About</v-btn>
 
     </v-app-bar>
 
