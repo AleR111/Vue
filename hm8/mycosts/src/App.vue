@@ -1,163 +1,55 @@
 <template>
-  <div id="app" @click="hideModalWindow">
-    <header class="header">My personal coasts</header>
-    <button class="btn-show" @click="showAddForm = !showAddForm"><span class="text-span">ADD NEW COST</span> <span
-        class="plus">+</span></button>
-    <AddForm v-if="showAddForm" @addData="addData" :categoryList="categoryList"/>
-    <div class="cost-list">
-      <a href="#" @click="setPayment('addForm', 'Entertainment', 2000)">Entertainment=2000</a> /
-      <a href="#" @click="setPayment('addForm', 'Transport', 50)">Transport=50</a> /
-      <a href="#" @click="setPayment('addForm', 'Food')">Food=200</a>
-    </div>
-    <CostsList :costsList="displayCostsList"/>
-    <Pagination :amountPages="amountPages" @showPage="showPage"/>
-    <transition name="fade">
-      <ModalWindow v-if="showModal" :settings="settings"/>
-    </transition>
-  </div>
+  <v-app>
+    <v-app-bar
+      app
+      color="primary"
+      dark
+    >
+      <div class="d-flex align-center">
+        <v-img
+          alt="Vuetify Logo"
+          class="shrink mr-2"
+          contain
+          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
+          transition="scale-transition"
+          width="40"
+        />
+
+        <v-img
+          alt="Vuetify Name"
+          class="shrink mt-1 hidden-sm-and-down"
+          contain
+          min-width="100"
+          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
+          width="100"
+        />
+      </div>
+
+      <v-spacer></v-spacer>
+
+      <v-btn
+        href="https://github.com/vuetifyjs/vuetify/releases/latest"
+        target="_blank"
+        text
+      >
+        <span class="mr-2">Latest Release</span>
+        <v-icon>mdi-open-in-new</v-icon>
+      </v-btn>
+    </v-app-bar>
+
+    <v-main>
+      <router-view/>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
 
-import CostsList from "./components/CostsList";
-import AddForm from './components/AddForm';
-import Pagination from './components/Pagination'
-
-import {mapMutations, mapGetters, mapActions} from 'vuex'
-
-
 export default {
   name: 'App',
-  components: {
-    CostsList,
-    AddForm,
-    Pagination,
-    ModalWindow: () => import ('./components/ModalWindow'),
-  },
-  data() {
-    return {
-      page: 'page1',
-      showAddForm: false,
-      showModal: false,
-      settings: {}
-    }
-  },
-  methods: {
-    ...mapMutations([
-      'setNewData',
-    ]),
-    ...mapActions([
-      'fetchCostsList',
-      'fetchAmountPages',
-      'fetchCategoryList',
-      'addDataServer'
-    ]),
-    addData(data) {
-      this.addDataServer(data)
-      this.showPage(1)
-    },
-    showPage(num) {
-      this.fetchCostsList(`page${num}`)
-      this.page = `page${num}`
-    },
-    setPayment(page, category, value) {
-      this.$router.push({
-        name: page,
-        params: {
-          category: category,
-          value: value
-        }
-      })
-      this.showAddForm = true
-    },
-    onShow(param) {
-      this.showModal = true
-      this.settings = param.settings
-      this.settings.page = this.page
-    },
-    onHide() {
-      this.showModal = false
-      this.settings = {}
-    },
-    hideModalWindow(e) {
-      if (!e.target.closest('#modal-window') && e.target.classList.value !== 'additional-btn') {
-        console.log(1111)
-        this.$modal.hide()
-      }
-    }
-  },
-  computed: {
-    ...mapGetters([
-      'getCostsListPage',
-      'getAmountPages',
-      'getCategoryList'
-    ]),
-    displayCostsList() {
-      return this.getCostsListPage(this.page)
-    },
-    amountPages() {
-      return this.getAmountPages
-    },
-    categoryList() {
-      return this.getCategoryList
-    }
-  },
-  created() {
-    this.fetchCostsList(`page1`)
-    this.fetchAmountPages()
-    this.fetchCategoryList()
-  },
-  mounted() {
-    this.$modal.EventBus.$on('show', this.onShow)
-    this.$modal.EventBus.$on('hide', this.onHide)
-  }
-}
+
+  data: () => ({
+    //
+  }),
+};
 </script>
-
-<style lang="scss" scoped>
-.header {
-  font-size: 32px;
-  text-align: left;
-  margin-bottom: 24px;
-}
-
-#app {
-  max-width: 1140px;
-  margin: 0 auto;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  //margin-top: 60px;
-}
-
-.btn-show {
-  font-size: 16px;
-  color: rgba(255, 255, 255, 0.85);
-  background-color: #3e99a1;
-  display: flex;
-  align-items: center;
-  border: none;
-  padding: 8px 16px;
-  margin-bottom: 16px;
-}
-
-.btn-show:hover {
-  cursor: pointer;
-}
-
-.plus {
-  font-size: 20px;
-  padding-left: 16px;
-}
-
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 0.4s;
-}
-
-.fade-enter, .fade-leave-to {
-  opacity: 0;
-}
-
-</style>
