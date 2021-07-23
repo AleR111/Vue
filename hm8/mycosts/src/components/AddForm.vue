@@ -1,15 +1,35 @@
 <template>
-  <div>
-    <form action="#" class="form">
-      <input class="input" type="text" placeholder="Payment description" list="category_list" v-model="category">
-      <datalist id="category_list">
-        <option v-for="(elem, idx) in categoryList" :key="idx" :value="elem" :label="elem"></option>
-      </datalist>
-      <input class="input" type="number" placeholder="Payment amount" v-model="value">
-      <input class="input" type="date" placeholder="Payment date" v-model="date">
+<!--  <div>-->
+<!--    <form action="#" class="form">-->
+<!--      <input class="input" type="text" placeholder="Payment description" list="category_list" v-model="category">-->
+<!--      <datalist id="category_list">-->
+<!--        <option v-for="(elem, idx) in categoryList" :key="idx" :value="elem" :label="elem"></option>-->
+<!--      </datalist>-->
+<!--      <input class="input" type="number" placeholder="Payment amount" v-model="value">-->
+<!--      <input class="input" type="date" placeholder="Payment date" v-model="date">-->
+<!--      <button class="btn-form" type="button" @click="addPayment"><span class="text-span">ADD</span> <span class="plus">+</span></button>-->
+<!--    </form>-->
+<!--  </div>-->
+
+    <v-card>
+      <v-combobox
+          v-model="category"
+          :items="categoryList"
+          label="Payment description"
+      ></v-combobox>
+      <v-text-field
+          label="Payment amount"
+          v-model.number="value"
+      ></v-text-field>
+      <v-text-field
+          label="Payment date"
+          value=""
+          type="date"
+          v-model="date"
+      ></v-text-field>
       <button class="btn-form" type="button" @click="addPayment"><span class="text-span">ADD</span> <span class="plus">+</span></button>
-    </form>
-  </div>
+    </v-card>
+
 </template>
 
 <script>
@@ -64,9 +84,10 @@ export default {
 $widthForm: 300px;
 
 .form {
-  width: $widthForm;
+
   display: grid;
   margin-bottom: 16px;
+  background-color: #fff;
 }
 .input {
   font-size: 14px;

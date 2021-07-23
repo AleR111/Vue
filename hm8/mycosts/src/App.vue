@@ -1,9 +1,9 @@
 <template>
   <v-app>
     <v-app-bar
-      app
-      dark
-      flat
+        app
+        dark
+        flat
     >
       <v-btn depressed :ripple="false" to="/home">Home</v-btn>
       <v-spacer></v-spacer>
@@ -12,7 +12,9 @@
     </v-app-bar>
 
     <v-main>
-      <router-view/>
+      <v-container>
+        <router-view/>
+      </v-container>
     </v-main>
   </v-app>
 </template>

@@ -1,20 +1,51 @@
+<!--<template>-->
+<!--  <div id="app" @click="hideModalWindow">-->
+<!--    <header class="header">My personal coasts</header>-->
+<!--    <button class="btn-show" @click="showAddForm = !showAddForm"><span class="text-span">ADD NEW COST</span> <span-->
+<!--        class="plus">+</span></button>-->
+<!--    <AddForm v-if="showAddForm" @addData="addData" :categoryList="categoryList"/>-->
+<!--    <div class="cost-list">-->
+<!--      <a href="#" @click="setPayment('addForm', 'Entertainment', 2000)">Entertainment=2000</a> /-->
+<!--      <a href="#" @click="setPayment('addForm', 'Transport', 50)">Transport=50</a> /-->
+<!--      <a href="#" @click="setPayment('addForm', 'Food')">Food=200</a>-->
+<!--    </div>-->
+<!--    <CostsList :costsList="displayCostsList"/>-->
+<!--    <Pagination :amountPages="amountPages" @showPage="showPage"/>-->
+<!--    <transition name="fade">-->
+<!--&lt;!&ndash;      <ModalWindow v-if="showModal" :settings="settings"/>&ndash;&gt;-->
+<!--    </transition>-->
+<!--  </div>-->
+<!--</template>-->
+
 <template>
-  <div id="app" @click="hideModalWindow">
-    <header class="header">My personal coasts</header>
-    <button class="btn-show" @click="showAddForm = !showAddForm"><span class="text-span">ADD NEW COST</span> <span
-        class="plus">+</span></button>
-    <AddForm v-if="showAddForm" @addData="addData" :categoryList="categoryList"/>
-    <div class="cost-list">
-      <a href="#" @click="setPayment('addForm', 'Entertainment', 2000)">Entertainment=2000</a> /
-      <a href="#" @click="setPayment('addForm', 'Transport', 50)">Transport=50</a> /
-      <a href="#" @click="setPayment('addForm', 'Food')">Food=200</a>
-    </div>
-    <CostsList :costsList="displayCostsList"/>
-    <Pagination :amountPages="amountPages" @showPage="showPage"/>
-    <transition name="fade">
-<!--      <ModalWindow v-if="showModal" :settings="settings"/>-->
-    </transition>
-  </div>
+  <v-row>
+    <v-col cols="6">
+      <header class="text-h5 text-md-3 pb-8">My personal coasts</header>
+      <v-dialog
+          v-model="dialog"
+          width="500"
+      >
+        <template v-slot:activator="{ on }">
+          <v-btn
+              color="teal lighten-1"
+              dark
+              v-on="on"
+          >
+            ADD NEW COST
+          </v-btn>
+        </template>
+
+        <v-card>
+          <AddForm @addData="addData" :categoryList="categoryList"/>
+        </v-card>
+      </v-dialog>
+      <CostsList :costsList="displayCostsList"/>
+      <Pagination :amountPages="amountPages" @showPage="showPage"/>
+    </v-col>
+    <v-col>
+
+    </v-col>
+  </v-row>
 </template>
 
 <script>
@@ -37,7 +68,9 @@ export default {
       page: 'page1',
       showAddForm: false,
       showModal: false,
-      settings: {}
+      settings: {},
+      //
+      dialog: false
     }
   },
   methods: {
@@ -53,6 +86,7 @@ export default {
     addData(data) {
       this.addDataServer(data)
       this.showPage(1)
+      this.dialog = false
     },
     showPage(num) {
       this.fetchCostsList(`page${num}`)
