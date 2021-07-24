@@ -1,11 +1,11 @@
 <template>
-  <div class="page-box">
-    <button class="btn-page" v-for="elem in amountPages"
-            :key="elem"
-            @click="setNumberPage(elem)"
-    >
-      {{ elem }}
-    </button>
+  <div class="text-center">
+    <v-pagination
+        v-model="page"
+        :length="amountPages"
+        @input="setNumberPage"
+
+    ></v-pagination>
   </div>
 </template>
 
@@ -16,6 +16,11 @@ export default {
     amountPages: {
       type: Number,
       default: () => 1
+    }
+  },
+  data() {
+    return {
+      page: 1
     }
   },
   methods: {
