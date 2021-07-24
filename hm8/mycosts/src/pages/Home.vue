@@ -40,7 +40,7 @@
           <AddForm @addData="addData" :categoryList="categoryList"/>
         </v-card>
       </v-dialog>
-      <CostsList :costsList="displayCostsList"/>
+      <CostsList :page="page" :costsList="displayCostsList"/>
       <Pagination :amountPages="amountPages" @showPage="showPage"/>
     </v-col>
     <v-col>

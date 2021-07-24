@@ -48,6 +48,7 @@
 
         <edit-payment :settings="{
                       id: elem.id,
+                      page,
                       date: elem.date,
                       category: elem.category,
                       value: elem.value
@@ -66,6 +67,9 @@ export default {
     EditPayment: () => import("./EditPayment")
   },
   props: {
+    page: {
+      type: String
+    },
     costsList: {
       type: Array,
       default: () => [],
