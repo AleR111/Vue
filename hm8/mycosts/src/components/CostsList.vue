@@ -45,8 +45,7 @@
       <v-col cols="2">{{ elem.value }}</v-col>
       <v-col cols="1">
 
-
-        <edit-payment :settings="{
+        <EditPayment :settings="{
                       id: elem.id,
                       page,
                       date: elem.date,

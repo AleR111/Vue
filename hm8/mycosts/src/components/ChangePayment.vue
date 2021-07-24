@@ -12,7 +12,7 @@
               @input="setCategory"
           ></v-text-field>
           <datalist id="category_list">
-            <!--            <option v-for="(elem, idx) in categoryList" :key="idx" :value="elem" :label="elem"></option>-->
+            <option v-for="(elem, idx) in categoryList" :key="idx" :value="elem" :label="elem"></option>
           </datalist>
         </v-col>
         <v-col cols="4">
@@ -47,6 +47,8 @@
 </template>
 
 <script>
+import {mapGetters, mapMutations} from "vuex";
+
 export default {
   name: "ChangePayment",
   props: {
@@ -56,12 +58,15 @@ export default {
   },
   date() {
     return {
-      category: this.settings.category,
-      value: this.settings.value,
-      date: this.settings.date
+      category: null,
+      value: null,
+      date: null
     }
   },
   methods: {
+    ...mapMutations([
+      'updateCostData'
+    ]),
     setCategory(data) {
       this.category = data
     },
@@ -72,17 +77,27 @@ export default {
       this.date = data
     },
     saveChanges() {
-const data = {
+      const data = {
+        page: this.settings.page,
+        id: this.settings.id,
+        date: this.date || this.settings.date,
+        category: this.category || this.settings.category,
+        value: this.value || this.settings.value
+      }
 
-  date: this.date,
-  category: this.category,
-  value: this.value
-
-}
-      console.log(data, this.settings.category)
-      // this.updateCostData(data)
+      this.updateCostData(data)
+      this.$emit('closeModal')
     }
-  }
+  },
+  computed: {
+    ...mapGetters([
+      'getCategoryList'
+    ]),
+
+    categoryList() {
+      return this.getCategoryList
+    },
+  },
 }
 </script>
 

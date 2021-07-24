@@ -28,7 +28,7 @@
         width="600"
     >
       <v-card>
-        <ChangePayment :settings="settings"/>
+        <ChangePayment :settings="settings" @closeModal="dialog=false"/>
       </v-card>
     </v-dialog>
   </div>
