@@ -44,13 +44,22 @@
       <v-col cols="5">{{ elem.category }}</v-col>
       <v-col cols="2">{{ elem.value }}</v-col>
       <v-col cols="1">
-        <v-btn class="additional-btn" @click="showAdditionalSettings(elem.id, idx)"
-               icon
-               x-small
-               plain
-               :ripple="false"
-        >&#8942;
-        </v-btn>
+        <v-menu
+            bottom
+            left
+        >
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+                icon
+                v-bind="attrs"
+                v-on="on"
+            >
+              <v-icon>mdi-dots-vertical</v-icon>
+            </v-btn>
+          </template>
+
+          <edit-payment :idPayment="elem.id"/>
+        </v-menu>
       </v-col>
     </v-row>
   </v-container>
@@ -59,6 +68,9 @@
 <script>
 export default {
   name: "CostsList",
+  components: {
+    EditPayment: () => import("./EditPayment")
+  },
   props: {
     costsList: {
       type: Array,
