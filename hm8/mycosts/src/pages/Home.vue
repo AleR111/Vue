@@ -23,7 +23,7 @@
       <header class="text-h5 text-md-3 pb-8">My personal coasts</header>
       <v-dialog
           v-model="dialog"
-          width="500"
+          width="600"
       >
         <template v-slot:activator="{ on }">
           <v-btn
