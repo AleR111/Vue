@@ -13,15 +13,23 @@
 
   <v-card-actions class="d-flex flex-column align-end">
 
-    <v-card class="mb-2" flat
+    <v-card flat
     >
       <v-row>
         <v-col cols="4">
-          <v-combobox
-              v-model="category"
-              :items="categoryList"
+          <!--          <v-combobox-->
+          <!--              v-model="category"-->
+          <!--              :items="categoryList"-->
+          <!--              label="Payment description"-->
+          <!--          ></v-combobox>-->
+          <v-text-field
               label="Payment description"
-          ></v-combobox>
+              list="category_list"
+              v-model="category"
+          ></v-text-field>
+          <datalist id="category_list">
+            <option v-for="(elem, idx) in categoryList" :key="idx" :value="elem" :label="elem"></option>
+          </datalist>
         </v-col>
         <v-col cols="4">
           <v-text-field
@@ -63,8 +71,8 @@ export default {
   props: ['categoryList'],
   data() {
     return {
-      category: this.$route.params.category,
-      value: this.$route.params.value,
+      category: null,
+      value: null,
       date: null
     }
   },
@@ -95,6 +103,7 @@ export default {
       console.log(data);
       this.$emit('addData', data)
       this.addNewCategory()
+
     },
     addNewCategory() {
       this.setNewCategory(this.category)
