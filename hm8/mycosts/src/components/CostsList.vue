@@ -44,22 +44,16 @@
       <v-col cols="5">{{ elem.category }}</v-col>
       <v-col cols="2">{{ elem.value }}</v-col>
       <v-col cols="1">
-        <v-menu
-            bottom
-            left
-        >
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn
-                icon
-                v-bind="attrs"
-                v-on="on"
-            >
-              <v-icon>mdi-dots-vertical</v-icon>
-            </v-btn>
-          </template>
 
-          <edit-payment :idPayment="elem.id"/>
-        </v-menu>
+
+        <edit-payment :settings="{
+                      id: elem.id,
+                      date: elem.date,
+                      category: elem.category,
+                      value: elem.value
+                      }"
+        />
+
       </v-col>
     </v-row>
   </v-container>
