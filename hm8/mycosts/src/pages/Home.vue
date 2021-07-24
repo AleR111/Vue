@@ -27,6 +27,7 @@
       >
         <template v-slot:activator="{ on }">
           <v-btn
+              class="rounded-sm mb-5"
               color="teal lighten-1"
               dark
               v-on="on"
