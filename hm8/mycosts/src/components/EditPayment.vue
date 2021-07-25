@@ -5,12 +5,14 @@
         left
     >
       <template v-slot:activator="{ on, attrs }">
-        <v-btn
-            icon
-            v-bind="attrs"
-            v-on="on"
-        >
-          <v-icon>mdi-dots-vertical</v-icon>
+        <v-btn class="additional-btn"
+               v-bind="attrs"
+               v-on="on"
+               icon
+               x-small
+               plain
+               :ripple="false"
+        >&#8942;
         </v-btn>
       </template>
 
@@ -64,6 +66,14 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+$btnColor: #26A69A;
+.additional-btn {
+  font-size: 20px;
+  font-weight: 700;
+}
 
+.additional-btn:hover {
+  color: $btnColor;
+}
 </style>
