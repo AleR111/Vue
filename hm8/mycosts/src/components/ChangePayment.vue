@@ -84,7 +84,7 @@ export default {
         category: this.category || this.settings.category,
         value: this.value || this.settings.value
       }
-
+      console.log( data)
       this.updateCostData(data)
       this.$emit('closeModal')
     }

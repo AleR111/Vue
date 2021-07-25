@@ -70,6 +70,7 @@ export default new Vuex.Store({
             cost.value = payload.value
             cost.category = payload.category
             cost.date = payload.date
+            console.log(state, payload)
         }
     },
     getters: {
