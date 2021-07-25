@@ -43,13 +43,17 @@
       <CostsList :page="page" :costsList="displayCostsList"/>
       <Pagination :amountPages="amountPages" @showPage="showPage"/>
     </v-col>
-    <v-col>
-
+    <v-col cols="6">
+      <div>
+        <canvas id="myChart"></canvas>
+      </div>
     </v-col>
   </v-row>
 </template>
 
 <script>
+import Chart from 'chart.js/auto';
+
 import CostsList from "../components/CostsList";
 import AddForm from '../components/AddForm';
 import Pagination from '../components/Pagination'
@@ -143,6 +147,37 @@ export default {
   mounted() {
     this.$modal.EventBus.$on('show', this.onShow)
     this.$modal.EventBus.$on('hide', this.onHide)
+
+    const labels = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+    ];
+    const data = {
+      labels: labels,
+      datasets: [{
+        label: 'My First dataset',
+        backgroundColor: 'rgb(255, 99, 132)',
+        borderColor: 'rgb(255, 99, 132)',
+        data: [65, 10, 5, 2, 20, 30, 45],
+      }]
+    };
+
+    const config = {
+      type: 'line',
+      data,
+      options: {}
+    };
+
+    const myChart = new Chart(
+        document.getElementById('myChart'),
+        config
+    );
+
+    console.log(myChart)
   }
 }
 </script>
