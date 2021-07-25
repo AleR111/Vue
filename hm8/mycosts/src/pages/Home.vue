@@ -45,7 +45,7 @@
     </v-col>
     <v-col cols="6">
       <div>
-        <Doughnut :costsList="costsList"/>
+        <Doughnut :costsList="costsList" :chart-data="datacollection"/>
       </div>
     </v-col>
   </v-row>
@@ -76,7 +76,8 @@ export default {
       showModal: false,
       settings: {},
       //
-      dialog: false
+      dialog: false,
+      datacollection: null
     }
   },
   methods: {
@@ -122,6 +123,34 @@ export default {
         console.log(1111)
         this.$modal.hide()
       }
+    },
+    setData(labels, data) {
+      this.datacollection = {
+        labels: labels,
+        datasets: [{
+          label: 'Coasts',
+          data: data,
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+            'rgba(29,27,26,0.2)'
+          ],
+          borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)',
+            'rgb(12,8,3)'
+          ],
+          borderWidth: 1
+        }]
+      }
     }
   },
   computed: {
@@ -141,7 +170,22 @@ export default {
       return this.getCategoryList
     },
     costsList() {
-      return this.getCostsList
+      let costsList = this.getCostsList
+      let labels = []
+      costsList.forEach(el => {
+        if (!labels.includes(el.category)) labels.push(el.category)
+      })
+
+      const data = labels.map(el => {
+        return costsList.reduce((total, e) => {
+          if (el === e.category) total += e.value
+          return total
+        }, 0)
+      })
+      console.log(this.getCostsList)
+      this.setData(labels, data)
+return 1
+
     }
   },
   created() {
