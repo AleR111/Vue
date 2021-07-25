@@ -3,12 +3,17 @@ import { Doughnut } from 'vue-chartjs'
 export default {
   name: 'Doughnut',
   extends: Doughnut,
+  props: {
+    costsList: {
+      type: Array,
+    }
+  },
   data() {
     return {
       chartData: {
         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange', 'Dark'],
         datasets: [{
-          label: '# of Votes',
+          label: 'Coasts',
           data: [10, 20, 10, 20, 30, 10, 0],
           backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
@@ -40,8 +45,15 @@ export default {
       }
     }
   },
-  mounted () {
-    this.renderChart(this.chartData, this.options)
+
+  methods: {
+    getLabels() {
+      let labels = []
+          this.costsList.forEach(el => {
+            if (!labels.includes(el.category)) labels.push(el.category)
+          })
+    }
   }
+
 }
 </script>

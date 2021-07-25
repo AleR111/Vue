@@ -45,7 +45,7 @@
     </v-col>
     <v-col cols="6">
       <div>
-        <Doughnut/>
+        <Doughnut :costsList="costsList"/>
       </div>
     </v-col>
   </v-row>
@@ -128,7 +128,8 @@ export default {
     ...mapGetters([
       'getCostsListPage',
       'getAmountPages',
-      'getCategoryList'
+      'getCategoryList',
+        'getCostsList'
     ]),
     displayCostsList() {
       return this.getCostsListPage(this.page)
@@ -138,6 +139,9 @@ export default {
     },
     categoryList() {
       return this.getCategoryList
+    },
+    costsList() {
+      return this.getCostsList
     }
   },
   created() {
