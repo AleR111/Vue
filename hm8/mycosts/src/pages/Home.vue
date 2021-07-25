@@ -45,14 +45,14 @@
     </v-col>
     <v-col cols="6">
       <div>
-        <canvas id="myChart"></canvas>
+        <Doughnut/>
       </div>
     </v-col>
   </v-row>
 </template>
 
 <script>
-import Chart from 'chart.js/auto';
+import Doughnut from '../chart/Doughnut'
 
 import CostsList from "../components/CostsList";
 import AddForm from '../components/AddForm';
@@ -63,6 +63,7 @@ import {mapMutations, mapGetters, mapActions} from 'vuex'
 export default {
   name: "Home",
   components: {
+    Doughnut,
     CostsList,
     AddForm,
     Pagination,
@@ -147,37 +148,6 @@ export default {
   mounted() {
     this.$modal.EventBus.$on('show', this.onShow)
     this.$modal.EventBus.$on('hide', this.onHide)
-
-    const labels = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-    ];
-    const data = {
-      labels: labels,
-      datasets: [{
-        label: 'My First dataset',
-        backgroundColor: 'rgb(255, 99, 132)',
-        borderColor: 'rgb(255, 99, 132)',
-        data: [65, 10, 5, 2, 20, 30, 45],
-      }]
-    };
-
-    const config = {
-      type: 'line',
-      data,
-      options: {}
-    };
-
-    const myChart = new Chart(
-        document.getElementById('myChart'),
-        config
-    );
-
-    console.log(myChart)
   }
 }
 </script>
