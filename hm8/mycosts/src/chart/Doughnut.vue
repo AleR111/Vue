@@ -11,10 +11,10 @@ export default {
   data() {
     return {
       chartData: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange', 'Dark'],
+        labels: this.getData().labels,
         datasets: [{
           label: 'Coasts',
-          data: [10, 20, 10, 20, 30, 10, 0],
+          data: this.getData().data,
           backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
             'rgba(54, 162, 235, 0.2)',
@@ -47,12 +47,25 @@ export default {
   },
 
   methods: {
-    getLabels() {
+    getData() {
       let labels = []
-          this.costsList.forEach(el => {
-            if (!labels.includes(el.category)) labels.push(el.category)
-          })
+      this.costsList.forEach(el => {
+        if (!labels.includes(el.category)) labels.push(el.category)
+      })
+
+      const data = labels.map(el => {
+        return this.costsList.reduce((total, e) => {
+          if (el === e.category) total += e.value
+          return total
+        }, 0)
+      })
+
+      return {labels, data}
     }
+  },
+
+  mounted () {
+    this.renderChart(this.chartData, this.options)
   }
 
 }
