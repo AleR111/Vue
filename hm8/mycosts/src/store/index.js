@@ -88,7 +88,7 @@ export default new Vuex.Store({
                  data.push(...state.costsList[el])
 
             }
-            console.log(data)
+
             return data
         }
     },

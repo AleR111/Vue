@@ -45,7 +45,7 @@
     </v-col>
     <v-col cols="6">
       <div>
-        <Doughnut :costsList="costsList" :chart-data="datacollection"/>
+        <Doughnut  :chart-data="dataCollection"/>
       </div>
     </v-col>
   </v-row>
@@ -77,7 +77,6 @@ export default {
       settings: {},
       //
       dialog: false,
-      datacollection: null
     }
   },
   methods: {
@@ -124,8 +123,8 @@ export default {
         this.$modal.hide()
       }
     },
-    setData(labels, data) {
-      this.datacollection = {
+    setDataCollection(labels, data) {
+      return {
         labels: labels,
         datasets: [{
           label: 'Coasts',
@@ -169,22 +168,21 @@ export default {
     categoryList() {
       return this.getCategoryList
     },
-    costsList() {
-      let costsList = this.getCostsList
+    dataCollection() {
+
       let labels = []
-      costsList.forEach(el => {
+      this.getCostsList.forEach(el => {
         if (!labels.includes(el.category)) labels.push(el.category)
       })
 
       const data = labels.map(el => {
-        return costsList.reduce((total, e) => {
+        return this.getCostsList.reduce((total, e) => {
           if (el === e.category) total += e.value
           return total
         }, 0)
       })
-      console.log(this.getCostsList)
-      this.setData(labels, data)
-return 1
+
+     return this.setDataCollection(labels, data)
 
     }
   },
