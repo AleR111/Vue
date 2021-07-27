@@ -33,23 +33,6 @@ export default {
 <style lang="scss" scoped>
 $colorTeal: #26A69A;
 
-.page-box {
-  width: 350px;
-  border: 1px solid rgba(154, 154, 154, 0.66);
-  box-sizing: border-box;
-  padding: 8px 16px;
-}
-
-.btn-page {
-  border: none;
-  background-color: #fff;
-}
-
-.btn-page:hover {
-  cursor: pointer;
-  color: #3e99a1;
-}
-
 .pagination {
   border: 1px solid rgba(161, 161, 161, 0.45);
   border-top: none;

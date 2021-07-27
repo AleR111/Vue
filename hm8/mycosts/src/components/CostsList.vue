@@ -1,34 +1,4 @@
 <template>
-  <!--  <div class="list">-->
-  <!--    <table class="table">-->
-  <!--      <colgroup>-->
-  <!--        <col class="brand"/>-->
-  <!--        <col class="price"/>-->
-  <!--        <col class="power"/>-->
-  <!--      </colgroup>-->
-  <!--      <thead>-->
-  <!--      <tr>-->
-  <!--        <th scope="col">#</th>-->
-  <!--        <th scope="col">Date</th>-->
-  <!--        <th scope="col">Category</th>-->
-  <!--        <th scope="col">Value</th>-->
-  <!--      </tr>-->
-  <!--      </thead>-->
-  <!--      <tbody>-->
-  <!--      <tr class="tr" v-for="(elem, idx) in costsList"-->
-  <!--          :key="idx"-->
-  <!--      >-->
-  <!--        <td class="td">{{ elem.id }}</td>-->
-  <!--        <td class="td">{{ elem.date }}</td>-->
-  <!--        <td class="td">{{ elem.category }}</td>-->
-  <!--        <td class="td">{{ elem.value }}</td>-->
-  <!--        <td class="td">-->
-  <!--          <button class="additional-btn" @click="showAdditionalSettings(elem.id, idx)">&#8942;</button>-->
-  <!--        </td>-->
-  <!--      </tr>-->
-  <!--      </tbody>-->
-  <!--    </table>-->
-  <!--  </div>-->
   <v-container>
     <v-row class="font-weight-black">
       <v-col cols="1">#</v-col>
