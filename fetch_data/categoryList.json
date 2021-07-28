@@ -1,9 +1,30 @@
 [
-  {"value": "Food"},
-  {"value": "Transport"},
-  {"value": "Education"},
-  {"value": "Internet"},
-  {"value": "GB"},
-  {"value": "Life"},
-  {"value": "Sport"}
+  {
+   "value": "Food",
+   "backColor": "rgba(255, 99, 132, 1)"
+  },
+  {
+   "value": "Transport",
+   "backColor": "rgba(54, 162, 235, 1)"
+  },
+  {
+   "value": "Education",
+   "backColor": "rgba(255, 206, 86, 1)"
+  },
+  {
+   "value": "Internet",
+   "backColor": "rgba(75, 192, 192, 1)"
+  },
+  {
+   "value": "GB",
+   "backColor": "rgba(153, 102, 255, 1)"
+  },
+  {
+   "value": "Life",
+   "backColor": "rgba(255, 159, 64, 1)"
+  },
+  {
+   "value": "Sport",
+   "backColor": "rgba(97, 182, 40, 1)"
+  }
 ]
