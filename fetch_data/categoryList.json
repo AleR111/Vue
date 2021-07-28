@@ -1,9 +1,9 @@
 [
-  "Food",
-  "Transport",
-  "Education",
-  "Internet",
-  "GB",
-  "Life",
-  "Sport"
+  {"value": "Food"},
+  {"value": "Transport"},
+  {"value": "Education"},
+  {"value": "Internet"},
+  {"value": "GB"},
+  {"value": "Life"},
+  {"value": "Sport"}
 ]
