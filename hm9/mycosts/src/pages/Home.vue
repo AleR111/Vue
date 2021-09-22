@@ -22,7 +22,7 @@
         </v-card>
       </v-dialog>
       <CostsList :page="page" :costsList="displayCostsList"/>
-      <Pagination :amountPages="amountPages" @showPage="showPage"/>
+      <Pagination :amountPages="amountPages" @showPage="showPage" :page="numberPage"/>
     </v-col>
     <v-col cols="6">
       <div>
@@ -52,6 +52,7 @@ export default {
   data() {
     return {
       page: 'page1',
+      numberPage: 1,
       showAddForm: false,
       settings: {},
       dialog: false,
@@ -75,6 +76,7 @@ export default {
     showPage(num) {
       this.fetchCostsList(`page${num}`)
       this.page = `page${num}`
+      this.numberPage = num
     },
     setPayment(page, category, value) {
       this.$router.push({

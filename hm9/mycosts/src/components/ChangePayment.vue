@@ -71,7 +71,7 @@ export default {
       this.category = data
     },
     setValue(data) {
-      this.value = data
+      this.value = +data
     },
     setDate(data) {
       this.date = data

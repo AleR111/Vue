@@ -15,11 +15,10 @@ export default {
     amountPages: {
       type: Number,
       default: () => 1
-    }
-  },
-  data() {
-    return {
-      page: 1
+    },
+    page: {
+      type: Number,
+      default: () => 1
     }
   },
   methods: {

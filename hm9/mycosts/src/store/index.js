@@ -3,6 +3,8 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
+const amountCostsOnPage = 10
+
 export default new Vuex.Store({
 
     state: {
@@ -41,7 +43,7 @@ export default new Vuex.Store({
                     value: elem.value,
                 }
 
-                const pageNum = Math.ceil((idx + 1) / 3)
+                const pageNum = Math.ceil((idx + 1) / amountCostsOnPage)
 
                 if (!state.costsList[`page${pageNum}`]) {
                     state.costsList[`page${pageNum}`] = [obj]
@@ -49,7 +51,7 @@ export default new Vuex.Store({
             })
 
             if (!state.amountPagesNew) state.amountPagesNew = state.amountPages.amount
-            state.amountPages.amount = state.amountPagesNew + Math.ceil((state.costsListTemporary.length) / 3) - 1
+            state.amountPages.amount = state.amountPagesNew + Math.ceil((state.costsListTemporary.length) / amountCostsOnPage) - 1
 
             state.costsListTemporary = []
         },
@@ -74,11 +76,18 @@ export default new Vuex.Store({
             }
         },
         updateCostData(state, payload) {
-            let cost = state.costsList[payload.page].find(elem => elem.id === payload.id)
-            cost.value = payload.value
-            cost.category = payload.category
-            cost.date = payload.date
-            console.log(state, payload)
+            state.costsList = {
+                ...state.costsList, [payload.page]: state.costsList[payload.page].map(el => {
+                    if (el.id !== payload.id) return el
+                    return {
+                        id: el.id,
+                        value: payload.value,
+                        category: payload.category,
+                        date: payload.date
+                    }
+                })
+            }
+            console.log(state)
         }
     },
     getters: {
@@ -108,6 +117,7 @@ export default new Vuex.Store({
                 .then(data => commit('setCostsList', data))
         },
         fetchAmountPages({commit, state}) {
+            if (state.amountPages.amount) return
             fetch(state.urlAmountPages)
                 .then(resolve => resolve.json())
                 .then(data => commit('setAmountPages', data))
