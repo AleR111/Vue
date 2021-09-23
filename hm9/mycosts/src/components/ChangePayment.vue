@@ -67,7 +67,8 @@ export default {
   },
   methods: {
     ...mapMutations([
-      'updateCostData'
+      'updateCostData',
+      'setNewCategory'
     ]),
     setCategory(data) {
       console.log(data)
@@ -93,12 +94,13 @@ export default {
       }
       if (!(this.category && this.value && this.date)) {
         console.log(data.value)
-        this.error = 'Please, input data'
+        this.error = 'Please, input correct data'
         return
       }
       console.log(data.value)
       this.updateCostData(data)
       this.$emit('closeModal')
+      this.setNewCategory(this.category)
     }
   },
   computed: {

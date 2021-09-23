@@ -123,6 +123,7 @@ export default new Vuex.Store({
                 .then(data => commit('setAmountPages', data))
         },
         fetchCategoryList({commit, state}) {
+            if (state.categoryList.length) return
             fetch(state.urlCategory)
                 .then(resolve => resolve.json())
                 .then(data => commit('setCategoryList', data))

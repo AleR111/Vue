@@ -91,8 +91,8 @@ export default {
     },
     addPayment() {
       const {category, value, date} = this;
-      if (!(category && value)) {
-        this.error = 'Please, input data'
+      if (!(category && +value)) {
+        this.error = 'Please, input correct data'
         return
       }
       const data = {
@@ -100,9 +100,10 @@ export default {
         category,
         value
       }
-      this.reset()
+
       this.$emit('addData', data)
       this.setNewCategory(this.category)
+      this.reset()
 
     }
   },
