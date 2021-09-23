@@ -46,6 +46,7 @@
         <v-icon small>mdi-plus</v-icon>
       </v-btn>
     </v-card>
+    <div style="color: red">{{ error }}</div>
 
   </v-card-actions>
 
@@ -61,13 +62,20 @@ export default {
     return {
       category: null,
       value: null,
-      date: null
+      date: null,
+      error: ''
     }
   },
   methods: {
     ...mapMutations([
       'setNewCategory',
     ]),
+    reset() {
+      this.category = null
+      this.value = null
+      this.date = null
+      this.error = ''
+    },
     formatDate(date) {
       let day = date.getDate();
       if (day < 10) day = "0" + day
@@ -83,17 +91,21 @@ export default {
     },
     addPayment() {
       const {category, value, date} = this;
+      if (!(category && value)) {
+        this.error = 'Please, input data'
+        return
+      }
       const data = {
         date: date ? this.formatDate(new Date(date)) : this.currentDate(),
         category,
         value
       }
-      console.log(data);
+      this.reset()
       this.$emit('addData', data)
       this.setNewCategory(this.category)
 
     }
-  }
+  },
 }
 </script>
 

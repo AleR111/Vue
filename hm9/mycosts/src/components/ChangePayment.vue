@@ -12,7 +12,7 @@
               @input="setCategory"
           ></v-text-field>
           <datalist id="category_list">
-            <option v-for="(elem, idx) in categoryList" :key="idx" :value="elem" :label="elem"></option>
+            <option v-for="(elem, idx) in categoryList" :key="idx" :value="elem.value" :label="elem.value"></option>
           </datalist>
         </v-col>
         <v-col cols="4">
@@ -42,6 +42,7 @@
         Save
       </v-btn>
     </v-card>
+    <div style="color: red">{{ error }}</div>
 
   </v-card-actions>
 </template>
@@ -56,11 +57,12 @@ export default {
       type: Object
     }
   },
-  date() {
+  data() {
     return {
-      category: null,
-      value: null,
-      date: null
+      category: this.settings.category,
+      value: this.settings.value,
+      date: this.settings.date,
+      error: ''
     }
   },
   methods: {
@@ -68,23 +70,33 @@ export default {
       'updateCostData'
     ]),
     setCategory(data) {
+      console.log(data)
       this.category = data
+      console.log(this.category)
     },
     setValue(data) {
+      console.log(data)
       this.value = +data
+      console.log(this.value)
     },
     setDate(data) {
       this.date = data
     },
     saveChanges() {
+
       const data = {
         page: this.settings.page,
         id: this.settings.id,
-        date: this.date || this.settings.date,
-        category: this.category || this.settings.category,
-        value: this.value || this.settings.value
+        date: this.date,
+        category: this.category,
+        value: this.value
       }
-      console.log( data)
+      if (!(this.category && this.value && this.date)) {
+        console.log(data.value)
+        this.error = 'Please, input data'
+        return
+      }
+      console.log(data.value)
       this.updateCostData(data)
       this.$emit('closeModal')
     }
