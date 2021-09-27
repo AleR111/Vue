@@ -1,7 +1,7 @@
 <template>
-  <v-row>
-    <v-col cols="6">
-      <header class="text-h5 text-md-3 pb-8">My personal coasts</header>
+  <v-row class="flex-column flex-md-row">
+    <v-col cols="12" md="6">
+      <header class="text-h5 text-md-3 pb-8">My personal costs</header>
       <v-dialog
           v-model="dialog"
           width="600"
@@ -24,7 +24,7 @@
       <CostsList :page="page" :costsList="displayCostsList"/>
       <Pagination :amountPages="amountPages" @showPage="showPage" :page="numberPage"/>
     </v-col>
-    <v-col cols="6">
+    <v-col cols="12" md="6">
       <div>
         <Doughnut :categoryList="categoryList"/>
       </div>
