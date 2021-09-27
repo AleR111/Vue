@@ -1,4 +1,4 @@
-# mycosts
+# Spender app
 
 ## Project setup
 ```
